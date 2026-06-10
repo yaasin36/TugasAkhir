@@ -1,158 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="shortcut icon" href="Images/logo-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css">
-    <title>ZYNNN STORE</title>
+    <title>Mobile Legends - ZYNNN STORE</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: { brand: { dark: '#0f172a', card: '#1e293b', primary: '#3b82f6', accent: '#8b5cf6' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 4px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
+<body class="bg-[#1f1f1f] text-slate-200 font-sans antialiased flex flex-col min-h-screen">
 
-<body>
-    <!-- Awal Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="Images/logo-huruf.png" alt="" width="100" height="45" class="d-inline-block align-text-top">
+    <!-- Header Top -->
+    <div class="bg-[#2c2c2c] py-2 px-4 md:px-8 border-b border-[#3b3b3b] sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="flex-shrink-0 hover:opacity-80 transition flex items-center">
+                <img src="images/logo.png" alt="Zynnn Store Logo" class="h-8 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x40/1f1f1f/ffffff?text=LOGO';">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="flex-grow max-w-4xl relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                </div>
+                <input type="text" data-i18n-placeholder="search" class="block w-full pl-10 pr-3 py-2 bg-[#3b3b3b] border-none rounded text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-500" placeholder="Cari Game atau Voucher">
+            </div>
+            <div class="flex-shrink-0 relative">
+                <button id="langMenuBtn" class="flex items-center gap-2 bg-[#3b3b3b] hover:bg-[#4a4a4a] transition px-3 py-1.5 rounded text-sm text-white border border-[#4a4a4a]">
+                    <span id="currentFlag">🇮🇩</span> 
+                    <span id="currentLang" class="font-semibold hidden sm:inline">ID / IDR</span>
+                    <i class="fa-solid fa-chevron-down text-xs ml-1 text-slate-400"></i>
+                </button>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-44 bg-[#2c2c2c] border border-[#4a4a4a] rounded shadow-xl overflow-hidden z-50">
+                    <button onclick="changeLanguage('id')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition"><span>🇮🇩</span> Indonesia (IDR)</button>
+                    <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition border-t border-[#3b3b3b]"><span>🇺🇸</span> English (USD)</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cek-pesanan.html">Cek Pesanan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="List Harga.html">List Harga</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-
-                </ul>
+    <!-- Sub Navbar -->
+    <nav class="bg-[#1f1f1f] border-b border-[#2c2c2c] sticky top-[53px] z-40 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div class="flex justify-between h-14 items-center overflow-x-auto no-scrollbar">
+                <div class="flex space-x-6 items-center whitespace-nowrap">
+                    <a href="index.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-house text-slate-400"></i> <span data-i18n="home">Home</span>
+                    </a>
+                    <a href="cek-pesanan.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart text-slate-400"></i> <span data-i18n="check_transaction">Cek Transaksi</span>
+                    </a>
+                    <a href="kalkulator.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-slate-400"></i> <span data-i18n="calculator">Kalkulator</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
-    <!-- Akhir Navbar -->
 
+    <!-- Main Content -->
+    <main class="flex-grow pb-12 pt-8">
+        <div class="max-w-[1000px] mx-auto px-4 md:px-8">
+            
+            <div class="text-center mb-10">
+                <h1 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">ZYNNN STORE MENYEDIAKAN:</h1>
+                <div class="w-24 h-1 bg-brand-primary mx-auto mt-4 rounded-full"></div>
+            </div>
 
-    <!-- Awal Kategori -->
-    <div class="container-fluid layanan pt-5 pb-5">
-        <div class="container text-center" id="layanan">
-            <h2 class="title-store">ZYNNN STORE MENYEDIAKAN: </h2>
-            <hr>
-            <div class="container mt-5 mb-5 ml-5 w-100" style="align-items: center;">
-                <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-4 col-6 ">
-                        <a href="diamond-mlbb.html" class="text-decoration-none te">
-                            <div class="card1 ">
-                                <center>
-                                    <img src="Images/mlbb/Diamond.png" class="card-img-top " alt="mlbb ">
-                                </center>
-                                <div class="card-body text-center ">
-                                    <h6 class="card-title pt-1 ">TOP UP DIAMOND</h6>
-                                    <br>
-                                </div>
-                            </div>
-                        </a>
+            <!-- Grid Layanan Mobile Legends -->
+            <div class="grid grid-cols-2 gap-4 md:gap-10 max-w-3xl mx-auto justify-center">
+                
+                <a href="diamond-mlbb.html" class="group relative flex flex-col rounded-3xl overflow-hidden shadow-xl bg-[#2c2c2c] border border-[#3b3b3b] hover:border-brand-primary hover:shadow-2xl hover:shadow-brand-primary/40 transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="Images/mlbb/topup-ml.png" alt="Top Up Diamond MLBB" class="w-full h-auto object-contain group-hover:scale-105 transition-all duration-500 bg-[#1f1f1f]" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0f172a/3b82f6?text=TOP+UP';">
+                    <div class="w-full bg-[#151b2b] mt-auto py-4 md:py-6 px-3 flex flex-col items-center justify-center border-t border-[#3b3b3b] group-hover:bg-[#1a233a] transition-colors">
+                        <h3 class="font-extrabold text-sm sm:text-lg md:text-xl text-white uppercase tracking-wider leading-tight group-hover:text-brand-primary text-center">TOP UP DIAMOND</h3>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-4 col-6 ">
-                        <a href="penghitung-wr.html" class="text-decoration-none te">
-                            <div class="card1 ">
-                                <center>
-                                    <img src="Images/mlbb/KALKULATOR.png" class="card-img-top " alt="mlbb ">
-                                </center>
-                                <div class="card-body text-center ">
-                                    <h6 class="card-title mb-lg-3">KALKULATOR WINRATE</h6>
-                                </div>
-                            </div>
-                        </a>
+                </a>
+
+                <a href="joki-mlbb.html" class="group relative flex flex-col rounded-3xl overflow-hidden shadow-xl bg-[#2c2c2c] border border-[#3b3b3b] hover:border-brand-accent hover:shadow-2xl hover:shadow-brand-accent/40 transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="Images/mlbb/joki-ml.png" alt="Joki Mobile Legends" class="w-full h-auto object-contain group-hover:scale-105 transition-all duration-500 bg-[#1f1f1f]" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0f172a/8b5cf6?text=JOKI+RANK';">
+                    <div class="w-full bg-[#151b2b] mt-auto py-4 md:py-6 px-3 flex flex-col items-center justify-center border-t border-[#3b3b3b] group-hover:bg-[#1a233a] transition-colors">
+                        <h3 class="font-extrabold text-sm sm:text-lg md:text-xl text-white uppercase tracking-wider leading-tight group-hover:text-brand-accent text-center">JOKI RANK</h3>
                     </div>
-                </div>
+                </a>
+
             </div>
         </div>
-    </div>
-    <!-- Akhir Kategori -->
+    </main>
 
-    <!-- tentang -->
-    <div class="home-subscribe-container" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="caption-group text-center caption-white">
-                        <div class="sub-caption">BERLANGGANAN</div>
-                        <div class="caption">
-                            <h2>Ikuti Kami Sekarang Juga!</h2>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-center subscribe-social-medias mt-4 ">
-                        <a rel="noreferrer" aria-label=" Instagram Social Media link" href="https://www.instagram.com/zynnn.store22" target="_blank">
-                            <img alt="instagram" src="Images/logo-instagram.png" style="width: 100px; height: 100px; margin-top: 2px;">
+    <!-- Footer -->
+    <footer class="bg-[#0b1120] border-t border-slate-800 pt-10 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h5 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-gamepad text-brand-primary"></i>ZYNNN STORE</h5>
+                    <p class="text-slate-400 text-sm leading-relaxed text-justify md:pr-10" data-i18n="footer_desc">
+                        ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. <br><br> Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-bold text-white mb-4" data-i18n="contact">Kontak Kami</h5>
+                    <div class="flex flex-col space-y-4">
+                        <a href="mailto:zynn.store89@gmail.com" class="flex items-center gap-3 text-slate-300 hover:text-white transition group w-fit">
+                            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-brand-primary transition"><i class="fa-solid fa-envelope"></i></div>
+                            <span>zynn.store89@gmail.com</span>
+                        </a>
+                        <a href="https://wa.me/6285926264599" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-white transition group w-fit">
+                            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-green-500 transition"><i class="fa-brands fa-whatsapp text-lg"></i></div>
+                            <span data-i18n="chat">Chat WhatsApp (+62 859-2626-4599)</span>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Awal Footer -->
-    <footer class="footer mt-auto">
-        <div class="container pt-md-3 pb-md-3 text-left text-md-left">
-            <div class="row">
-                <div class="col-md-7 col-lg-7 col-sm-12 mt-md-0 mt-3 p-3">
-                    <h5 class="text-uppercase">ZYNNN STORE</h5>
-                    <div class="footer-info mt-4">
-                        <p>
-                            ZYNNN Store adalah Tempat Top Up Games Yang Aman, Murah. ZYNNN Store Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire. ZYNNN Store juga menyediakan jasa joki Mobile Legends. Untuk Mempermudah Pembayaran Anda Disini Kami
-                            Juga Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.
-                            <br>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-5 col-sm-12 mt-md-0 p-3">
-                    <div class="col-lg-9 text-center text-lg-left pt-3 pt-lg-0">
-                        <div class="h5" style="text-align: start;">Kontak Kami</div>
-                    </div>
-                    <div class="payment-channels-track-container">
-                        <div class="payment-channels-track marquee">
-                            <div class="footer-pc-marquee">
-                                <i class="fas fa-envelope"></i> <a class="home-cs-card" href="mailto:zynn.store89@gmail.com" target="_blank" rel="noreferrer" style="color: white;">Email</a>
-                                <p></p>
-                                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/6285926264599" style="color: white;">Chat WhatsApp</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="border-t border-slate-800 pt-6 text-center text-sm text-slate-500 flex flex-col md:flex-row justify-center items-center gap-2">
+                <span data-i18n="copyright">&copy; Copyright 2022 ZYNNN STORE. All rights reserved.</span><span class="hidden md:inline">•</span>
+                <a href="#" class="hover:text-brand-primary transition" data-i18n="tos">Terms of Service</a>
             </div>
-        </div>
-
-
-
-        <div class="footer-copyright text-center py-3 bg-dark">© Copyright 2022
-            <a href="#"> ZYNNN STORE</a> • <a href="#"> Terms of
-                Service</a>
-
         </div>
     </footer>
-    <!-- Akhir Footer -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous ">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous ">
+    <!-- Script Translate -->
+    <script>
+        const translations = {
+            id: { flag: '🇮🇩', label: 'ID / IDR', bannerSrc: 'images/banner-id.png', search: 'Cari Game atau Voucher', home: 'Home', check_transaction: 'Cek Transaksi', calculator: 'Kalkulator', popular: 'PRODUK GAME YANG TERSEDIA', popular_desc: 'Pilih game favorit Anda dan lakukan top-up dan joki sekarang juga.', subscribe: 'Berlangganan', follow: 'Ikuti Kami Sekarang Juga!', footer_desc: 'ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. <br><br> Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.', contact: 'Kontak Kami', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Syarat & Ketentuan' },
+            en: { flag: '🇺🇸', label: 'EN / USD', bannerSrc: 'images/banner-eng.png', search: 'Search Game or Voucher', home: 'Home', check_transaction: 'Check Order', calculator: 'Calculator', popular: 'AVAILABLE GAME PRODUCTS', popular_desc: 'Choose your favorite game and top-up and boost right now.', subscribe: 'Subscribe', follow: 'Follow Us Now!', footer_desc: 'ZYNNN Store is a Safe and Cheap Game Top Up Place. Providing Top Up Services such as Mobile Legends Diamonds and Free Fire Diamonds, as well as Mobile Legends pilot services. <br><br> To Make Payment Easier, we provide DANA, OVO, Gopay, Shopee Pay, and BRI BANK Payment Methods.', contact: 'Contact Us', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Terms of Service' }
+        };
+        const langMenuBtn = document.getElementById('langMenuBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        langMenuBtn.addEventListener('click', (e) => { e.stopPropagation(); langDropdown.classList.toggle('hidden'); });
+        document.addEventListener('click', () => { langDropdown.classList.add('hidden'); });
+        function changeLanguage(lang) {
+            document.getElementById('currentFlag').textContent = translations[lang].flag;
+            document.getElementById('currentLang').textContent = translations[lang].label;
+            document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[lang][key]) el.innerHTML = translations[lang][key]; });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (translations[lang][key]) el.placeholder = translations[lang][key]; });
+        }
     </script>
 </body>
-
-</html>
-
 </html>

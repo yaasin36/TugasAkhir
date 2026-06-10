@@ -1,146 +1,320 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="shortcut icon" href="Images/logo-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/pesanan.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>ZYNNN STORE</title>
+    <title>Cek Pesanan - ZYNNN STORE</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a', card: '#1e293b', primary: '#3b82f6', accent: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5a5a5a; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
+<body class="bg-[#1f1f1f] text-slate-200 font-sans antialiased flex flex-col min-h-screen">
 
-<body>
-    <!-- Awal Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="Images/logo-huruf.png" alt="" width="100" height="45" class="d-inline-block align-text-top">
+    <!-- Header / Navbar Top -->
+    <div class="bg-[#2c2c2c] py-2 px-4 md:px-8 border-b border-[#3b3b3b] sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="flex-shrink-0 hover:opacity-80 transition flex items-center">
+                <img src="images/logo.png" alt="Zynnn Store Logo" class="h-8 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x40/1f1f1f/ffffff?text=LOGO';">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="flex-grow max-w-4xl relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                </div>
+                <input type="text" data-i18n-placeholder="search" class="block w-full pl-10 pr-3 py-2 bg-[#3b3b3b] border-none rounded text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-500" placeholder="Cari Game atau Voucher">
+            </div>
+            <div class="flex-shrink-0 relative">
+                <button id="langMenuBtn" class="flex items-center gap-2 bg-[#3b3b3b] hover:bg-[#4a4a4a] transition px-3 py-1.5 rounded text-sm text-white border border-[#4a4a4a]">
+                    <span id="currentFlag">🇮🇩</span> 
+                    <span id="currentLang" class="font-semibold hidden sm:inline">ID / IDR</span>
+                    <i class="fa-solid fa-chevron-down text-xs ml-1 text-slate-400"></i>
+                </button>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-44 bg-[#2c2c2c] border border-[#4a4a4a] rounded shadow-xl overflow-hidden z-50">
+                    <button onclick="changeLanguage('id')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition">
+                        <span>🇮🇩</span> Indonesia (IDR)
+                    </button>
+                    <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition border-t border-[#3b3b3b]">
+                        <span>🇺🇸</span> English (USD)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cek-pesanan.html">Cek Pesanan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="List Harga.html">List Harga</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-
-                </ul>
+    <!-- Sub Navbar -->
+    <nav class="bg-[#1f1f1f] border-b border-[#2c2c2c] sticky top-[53px] z-40 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div class="flex justify-between h-14 items-center overflow-x-auto no-scrollbar">
+                <div class="flex space-x-6 items-center whitespace-nowrap">
+                    <a href="index.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-house text-slate-400"></i> <span data-i18n="home">Home</span>
+                    </a>
+                    <a href="cek-pesanan.html" class="text-white text-sm hover:text-white transition flex items-center gap-2 font-medium">
+                        <i class="fa-solid fa-magnifying-glass-chart text-brand-accent"></i> <span data-i18n="check_transaction">Cek Transaksi</span>
+                    </a>
+                    <a href="kalkulator.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-slate-400"></i> <span data-i18n="calculator">Kalkulator</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
-    <!-- Akhir Navbar -->
 
-    <!-- Pesanan -->
-    <div class="container">
-        <div class="row mt-2" style="margin:0px">
-            <div class="col-md-12 col-sm-12 col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 style="color: white;">Periksa pesanan anda</h5>
-                        <hr>
-                        <form action="invoice">
-                            <div class="">
-                                <div class="mb-3">
-                                    <label class="mt-1 mb-3" style="color: white;">Kode Invoice</label>
-                                    <input type="text" class="form-control" name="id" placeholder="Masukan Kode Invoice" required="">
-                                </div>
-                                <div class="mb-3">
-                                    <button type="submit" class="btn btn-light" name="submit"><i class="fs fa-search"></i> Periksa</button>
-                                </div>
-                            </div>
-                        </form>
+    <!-- Main Content Area -->
+    <main class="flex-grow py-12">
+        <div class="max-w-2xl mx-auto px-4 md:px-8">
+            
+            <div class="text-center mb-8">
+                <h1 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wider" data-i18n="track_order">Lacak Pesanan Anda</h1>
+                <p class="text-slate-400 mt-2" data-i18n="track_desc">Ketahui status pesanan Anda secara real-time.</p>
+            </div>
+
+            <!-- Form Cek Pesanan -->
+            <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-2xl overflow-hidden flex flex-col">
+                <!-- Header Pita -->
+                <div class="flex items-stretch bg-[#1f1f1f] border-b border-[#3b3b3b]">
+                    <div class="bg-[#8b5cf6] w-14 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-receipt text-white text-xl"></i>
                     </div>
+                    <div class="py-4 px-5 flex items-center w-full">
+                        <h3 class="text-lg font-bold text-white" data-i18n="check_trx_title">Periksa Transaksi</h3>
+                    </div>
+                </div>
+                
+                <!-- Body -->
+                <div class="p-6 md:p-8">
+                    <!-- Form disesuaikan untuk divalidasi oleh JavaScript -->
+                    <form id="searchForm" onsubmit="searchOrder(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="inv_code">Kode Invoice</span> <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-hashtag text-slate-400 text-lg"></i>
+                                </div>
+                                <input type="text" name="invoice" id="invoiceInput" data-i18n-placeholder="inv_placeholder" placeholder="Contoh: TP020260609F62A..." required 
+                                       class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl pl-12 pr-4 py-4 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] transition shadow-inner font-mono tracking-wider">
+                            </div>
+                            <p class="text-xs text-slate-400 mt-3 italic" data-i18n="inv_info">Nomor Invoice bisa didapatkan setelah Anda menekan tombol "Beli Sekarang" pada halaman pemesanan.</p>
+                        </div>
+
+                        <button type="submit" class="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold text-lg py-4 px-4 rounded-xl shadow-lg transition-transform transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-search"></i> <span data-i18n="search_btn">Cari Pesanan</span>
+                        </button>
+                    </form>
                 </div>
             </div>
 
         </div>
+    </main>
+
+    <!-- Modal Error (Popup Tidak Ditemukan) -->
+    <div id="errorModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#1a1b1f] border border-[#3b3b3b] rounded-2xl w-full max-w-sm shadow-2xl p-6 text-center transform scale-95 opacity-0 transition-all duration-300" id="errorModalContent">
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-file-circle-xmark text-3xl text-red-500"></i>
+            </div>
+            <h3 class="text-white font-bold text-xl mb-2" data-i18n="not_found_title">Tidak Ditemukan!</h3>
+            <p id="errorModalText" class="text-slate-400 text-sm mb-6" data-i18n="not_found_desc">Sistem tidak dapat menemukan pesanan dengan invoice tersebut.</p>
+            <button onclick="closeErrorModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl transition-colors" data-i18n="back_btn">
+                Kembali
+            </button>
+        </div>
     </div>
 
-    <!-- tentang -->
-    <div class="home-subscribe-container" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="caption-group text-center caption-white">
-                        <div class="sub-caption">BERLANGGANAN</div>
-                        <div class="caption">
-                            <h2>Ikuti Kami Sekarang Juga!</h2>
-                        </div>
-                    </div>
+    <!-- Tentang / Berlangganan -->
+    <section id="about" class="py-12 bg-gradient-to-b from-brand-dark to-[#1f1f1f] mt-10">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <span class="text-brand-primary font-semibold text-sm tracking-widest uppercase" data-i18n="subscribe">Berlangganan</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mt-2 mb-6" data-i18n="follow">Ikuti Kami Sekarang Juga!</h2>
+            <div class="flex justify-center mt-4">
+                <a href="https://www.instagram.com/zynnn.store22" target="_blank" rel="noreferrer" class="w-16 h-16 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 
-                    <div class="d-flex justify-content-center subscribe-social-medias mt-4 ">
-                        <a rel="noreferrer" aria-label=" Instagram Social Media link" href="https://www.instagram.com/zynnn.store22" target="_blank">
-                            <img alt="instagram" src="Images/logo-instagram.png" style="width: 100px; height: 100px; margin-top: 2px;">
+    <!-- Footer -->
+    <footer class="bg-[#0b1120] border-t border-slate-800 pt-10 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h5 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad text-brand-primary"></i>
+                        ZYNNN STORE
+                    </h5>
+                    <p class="text-slate-400 text-sm leading-relaxed text-justify md:pr-10" data-i18n="footer_desc">
+                        ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. 
+                        <br><br>
+                        Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.
+                    </p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-bold text-white mb-4" data-i18n="contact">Kontak Kami</h5>
+                    <div class="flex flex-col space-y-4">
+                        <a href="mailto:zynn.store89@gmail.com" class="flex items-center gap-3 text-slate-300 hover:text-white transition group w-fit">
+                            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-brand-primary transition">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <span>zynn.store89@gmail.com</span>
+                        </a>
+                        <a href="https://wa.me/6285926264599" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-white transition group w-fit">
+                            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-green-500 transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </div>
+                            <span data-i18n="chat">Chat WhatsApp (+62 859-2626-4599)</span>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Awal Footer -->
-    <footer class="footer mt-auto">
-        <div class="container pt-md-3 pb-md-3 text-left text-md-left">
-            <div class="row">
-                <div class="col-md-7 col-lg-7 col-sm-12 mt-md-0 mt-3 p-3">
-                    <h5 class="text-uppercase">ZYNNN STORE</h5>
-                    <div class="footer-info mt-4">
-                        <p>
-                            ZYNNN Store adalah Tempat Top Up Games Yang Aman, Murah. ZYNNN Store Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire. ZYNNN Store juga menyediakan jasa joki Mobile Legends. Untuk Mempermudah Pembayaran Anda Disini Kami
-                            Juga Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.
-                            <br>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-5 col-sm-12 mt-md-0 p-3">
-                    <div class="col-lg-9 text-center text-lg-left pt-3 pt-lg-0">
-                        <div class="h5" style="text-align: start;">Kontak Kami</div>
-                    </div>
-                    <div class="payment-channels-track-container">
-                        <div class="payment-channels-track marquee">
-                            <div class="footer-pc-marquee">
-                                <i class="fas fa-envelope"></i> <a class="home-cs-card" href="mailto:zynn.store89@gmail.com" target="_blank" rel="noreferrer" style="color: white;">Email</a>
-                                <p></p>
-                                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/6285926264599" style="color: white;">Chat WhatsApp</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="border-t border-slate-800 pt-6 text-center text-sm text-slate-500 flex flex-col md:flex-row justify-center items-center gap-2">
+                <span data-i18n="copyright">&copy; Copyright 2022 ZYNNN STORE. All rights reserved.</span>
+                <span class="hidden md:inline">•</span>
+                <a href="#" class="hover:text-brand-primary transition" data-i18n="tos">Terms of Service</a>
             </div>
         </div>
-
-
-
-        <div class="footer-copyright text-center py-3 bg-dark">© Copyright 2022
-            <a href="#"> ZYNNN STORE</a> • <a href="#"> Terms of
-                Service</a>
-
-        </div>
     </footer>
-    <!-- Akhir Footer -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous ">
-    </script>
+    <!-- Script Switch Bahasa dan Logika Pencarian Pesanan -->
+    <script>
+        // Logika Pencarian Pesanan (Simulasi)
+        function searchOrder(event) {
+            event.preventDefault(); // Mencegah form reload halaman otomatis
+            
+            const invoice = document.getElementById('invoiceInput').value.trim();
+            const storedOrder = localStorage.getItem('currentOrder');
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous ">
+            // Simulasi: Mengecek apakah ada pesanan yang tersimpan di Local Storage
+            if (!storedOrder) {
+                // Jika belum pernah beli / data kosong
+                showErrorModal(getTrans('not_found_desc'));
+            } else {
+                // Jika ada pesanan, karena kita pakai simulasi, kita langsung arahkan ke invoice
+                // (Di sistem asli, kode akan mencocokkan invoice dengan database)
+                
+                // Tambahkan invoice ke data localStorage agar di halaman sebelah tampilnya sama
+                let data = JSON.parse(storedOrder);
+                data.invoice = invoice;
+                localStorage.setItem('currentOrder', JSON.stringify(data));
+
+                window.location.href = 'cek-transaksi.html';
+            }
+        }
+
+        // Logika Modal Error
+        const errorModal = document.getElementById('errorModal');
+        const errorModalContent = document.getElementById('errorModalContent');
+        const errorModalText = document.getElementById('errorModalText');
+
+        function showErrorModal(message) {
+            errorModalText.textContent = message;
+            errorModal.classList.remove('hidden');
+            errorModal.classList.add('flex');
+            setTimeout(() => {
+                errorModalContent.classList.remove('scale-95', 'opacity-0');
+                errorModalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeErrorModal() {
+            errorModalContent.classList.remove('scale-100', 'opacity-100');
+            errorModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                errorModal.classList.add('hidden');
+                errorModal.classList.remove('flex');
+            }, 300);
+        }
+
+        const translations = {
+            id: {
+                flag: '🇮🇩', label: 'ID / IDR', home: 'Home', check_transaction: 'Cek Transaksi', calculator: 'Kalkulator',
+                search: 'Cari Game atau Voucher', subscribe: 'Berlangganan', follow: 'Ikuti Kami Sekarang Juga!',
+                footer_desc: 'ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. <br><br> Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.',
+                contact: 'Kontak Kami', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Syarat & Ketentuan',
+                track_order: 'Lacak Pesanan Anda', track_desc: 'Ketahui status pesanan Anda secara real-time.', check_trx_title: 'Periksa Transaksi', inv_code: 'Kode Invoice', inv_placeholder: 'Contoh: TP020260609F62A...', inv_info: 'Nomor Invoice bisa didapatkan setelah Anda menekan tombol "Beli Sekarang" pada halaman pemesanan.', search_btn: 'Cari Pesanan', not_found_title: 'Tidak Ditemukan!', not_found_desc: 'Sistem tidak dapat menemukan pesanan dengan invoice tersebut. Pastikan Anda sudah membuat pesanan.', back_btn: 'Kembali'
+            },
+            en: {
+                flag: '🇺🇸', label: 'EN / USD', home: 'Home', check_transaction: 'Check Order', calculator: 'Calculator',
+                search: 'Search Game or Voucher', subscribe: 'Subscribe', follow: 'Follow Us Now!',
+                footer_desc: 'ZYNNN Store is a Safe and Cheap Game Top Up Place. Providing Top Up Services such as Mobile Legends Diamonds and Free Fire Diamonds, as well as Mobile Legends pilot services. <br><br> To Make Payment Easier, we provide DANA, OVO, Gopay, Shopee Pay, and BRI BANK Payment Methods.',
+                contact: 'Contact Us', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Terms of Service',
+                track_order: 'Track Your Order', track_desc: 'Know your order status in real-time.', check_trx_title: 'Check Transaction', inv_code: 'Invoice Code', inv_placeholder: 'Example: TP020260609F62A...', inv_info: 'You can get the Invoice Number after clicking the "Buy Now" button on the order page.', search_btn: 'Search Order', not_found_title: 'Not Found!', not_found_desc: 'The system cannot find an order with that invoice. Make sure you have placed an order.', back_btn: 'Back'
+            }
+        };
+
+        const langMenuBtn = document.getElementById('langMenuBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+
+        if(langMenuBtn) {
+            langMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('hidden');
+            });
+        }
+
+        document.addEventListener('click', () => {
+            if(langDropdown) langDropdown.classList.add('hidden');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('appLang') || 'id';
+            changeLanguage(savedLang);
+        });
+
+        function changeLanguage(lang) {
+            localStorage.setItem('appLang', lang); 
+            if(currentFlag && currentLang) {
+                currentFlag.textContent = translations[lang].flag;
+                currentLang.textContent = translations[lang].label;
+            }
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key]; 
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+        }
+        
+        function getTrans(key) {
+            const lang = localStorage.getItem('appLang') || 'id';
+            return translations[lang][key] || key;
+        }
     </script>
 </body>
-
-</html>
-
 </html>

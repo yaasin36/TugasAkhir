@@ -1,521 +1,814 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="shortcut icon" href="Images/logo-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/Diamond.css">
-    <title>ZYNNN STORE</title>
+    <title>Top Up Mobile Legends - ZYNNN STORE</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a', card: '#1e293b', primary: '#3b82f6', accent: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5a5a5a; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Sembunyikan panah atas/bawah pada input number */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
 </head>
+<body class="bg-[#1f1f1f] text-slate-200 font-sans antialiased flex flex-col min-h-screen">
 
-<body>
-    <!-- Awal Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="Images/logo-huruf.png" alt="" width="100" height="45" class="d-inline-block align-text-top">
+    <!-- Header / Navbar Top -->
+    <div class="bg-[#2c2c2c] py-2 px-4 md:px-8 border-b border-[#3b3b3b] sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="flex-shrink-0 hover:opacity-80 transition flex items-center">
+                <img src="Images/logo.png" alt="Zynnn Store Logo" class="h-8 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x40/1f1f1f/ffffff?text=LOGO';">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="flex-grow max-w-4xl relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                </div>
+                <input type="text" data-i18n-placeholder="search" class="block w-full pl-10 pr-3 py-2 bg-[#3b3b3b] border-none rounded text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-500" placeholder="Cari Game atau Voucher">
+            </div>
+            <div class="flex-shrink-0 relative">
+                <button id="langMenuBtn" class="flex items-center gap-2 bg-[#3b3b3b] hover:bg-[#4a4a4a] transition px-3 py-1.5 rounded text-sm text-white border border-[#4a4a4a]">
+                    <span id="currentFlag">🇮🇩</span> 
+                    <span id="currentLang" class="font-semibold hidden sm:inline">ID / IDR</span>
+                    <i class="fa-solid fa-chevron-down text-xs ml-1 text-slate-400"></i>
+                </button>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-44 bg-[#2c2c2c] border border-[#4a4a4a] rounded shadow-xl overflow-hidden z-50">
+                    <button onclick="changeLanguage('id')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition">
+                        <span>🇮🇩</span> Indonesia (IDR)
+                    </button>
+                    <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition border-t border-[#3b3b3b]">
+                        <span>🇺🇸</span> English (USD)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cek-pesanan.html">Cek Pesanan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="List Harga.html">List Harga</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-
-                </ul>
+    <!-- Sub Navbar -->
+    <nav class="bg-[#1f1f1f] border-b border-[#2c2c2c] sticky top-[53px] z-40 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div class="flex justify-between h-14 items-center overflow-x-auto no-scrollbar">
+                <div class="flex space-x-6 items-center whitespace-nowrap">
+                    <a href="index.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-house text-slate-400"></i> <span data-i18n="home">Home</span>
+                    </a>
+                    <a href="cek-pesanan.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart text-slate-400"></i> <span data-i18n="check_transaction">Cek Transaksi</span>
+                    </a>
+                    <a href="kalkulator.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-slate-400"></i> <span data-i18n="calculator">Kalkulator</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
-    <!-- Akhir Navbar -->
 
-    <!-- Diamond -->
-    <div class="container">
-        <div class="row mt-2" style="margin:0px">
-            <!-- kanan -->
-            <div class="col-md-12 col-sm-12 col-lg-4">
-                <div class="text-center text-md-left mb-2">
-                    <img src="Images/mlbb/Diamond.png" class="img-responsive rounded mb-2" width="200px" height="200px">
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-8">
+            
+            <!-- Breadcrumb Navigation -->
+            <div class="mb-6 flex items-center gap-2 text-sm text-slate-400">
+                <a href="index.html" class="hover:text-white transition"><i class="fa-solid fa-house"></i></a>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                <a href="mobile-legends.html" class="hover:text-white transition">Mobile Legends</a>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                <span class="text-brand-primary font-semibold" data-i18n="topup_diamond">Top Up Diamond</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Sidebar: Info Game -->
+                <div class="lg:col-span-1">
+                    <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] overflow-hidden sticky top-32 shadow-lg">
+                        <div class="p-6 text-center">
+                            <img src="Images/mlbb/topup-ml.png" alt="Mobile Legends" class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-2xl object-cover mb-4 shadow-md bg-[#1f1f1f]" onerror="this.onerror=null; this.src='https://placehold.co/200x200/0f172a/3b82f6?text=MLBB';">
+                            <h2 class="text-2xl font-bold text-white uppercase tracking-wide">Mobile Legends</h2>
+                            <p class="text-yellow-400 font-semibold mt-1" data-i18n="auto_process">Proses Otomatis ⚡</p>
+                            
+                            <div class="my-6 border-t border-b border-[#4a4a4a] py-3">
+                                <p class="text-cyan-400 font-bold"><i class="fa-regular fa-clock"></i> <span data-i18n="open_hours">Open 09.00 - 20.00 WIB</span></p>
+                            </div>
+                            
+                            <div class="text-left text-sm text-slate-300 leading-relaxed bg-[#1f1f1f] p-4 rounded-xl border border-[#3b3b3b]">
+                                <p class="font-bold text-white mb-2"><i class="fa-solid fa-circle-info text-brand-primary mr-1"></i> <span data-i18n="how_to_order">Cara Order :</span></p>
+                                <ol class="list-decimal list-inside space-y-1">
+                                    <li data-i18n="step_1_desc">Masukan ID & (SERVER)</li>
+                                    <li data-i18n="step_2_desc">Pilih nominal Diamond</li>
+                                    <li data-i18n="step_3_desc">Pilih Metode Pembayaran</li>
+                                    <li data-i18n="step_4_desc">Masukan Nomor WhatsApp Kamu</li>
+                                    <li data-i18n="step_5_desc">Klik Beli Sekarang</li>
+                                    <li data-i18n="step_6_desc">Tunggu 1 - 3 Menit (Jika Event Max 6 Jam), Diamond masuk otomatis!</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h5>Diamond<br>
-                    <font size="2" color="#FFFF00"><b>Proses Otomatis</b></font>
-                </h5>
 
-                <center>
-                    <hr>
-                    <font size="4" color="#FFFF00"><b>Open 09.00 -20.00 WIB</b></font>
-                    <hr>
-                </center>
+                <!-- Right Area: Order Form -->
+                <div class="lg:col-span-2">
+                    <form id="orderForm" class="space-y-8 flex flex-col mt-4 md:mt-0" onsubmit="event.preventDefault(); validateFormAndSubmit();">
+                        
+                        <!-- Step 1: Input Data -->
+                        <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md overflow-hidden flex flex-col">
+                            <div class="flex items-stretch bg-[#1f1f1f] border-b border-[#3b3b3b]">
+                                <div class="bg-[#8b5cf6] w-14 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">1</span>
+                                </div>
+                                <div class="py-4 px-5 flex items-center w-full">
+                                    <h3 class="text-lg font-bold text-white" data-i18n="step1_title">Masukkan Data Akun</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 sm:p-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="input_id">ID</span> <span class="text-red-500">*</span></label>
+                                        <input type="number" name="userid" data-i18n-placeholder="placeholder_id" placeholder="Masukkan ID" required 
+                                               onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 187 && event.keyCode !== 190 && event.keyCode !== 188 && event.keyCode !== 109 && event.keyCode !== 107"
+                                               class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] transition shadow-inner">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="input_server">Server</span> <span class="text-red-500">*</span></label>
+                                        <input type="number" name="zoneid" data-i18n-placeholder="placeholder_server" placeholder="(Server) Contoh: 1234" maxlength="5" 
+                                               oninput="if(this.value.length > 5) this.value = this.value.slice(0, 5);" 
+                                               onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 187 && event.keyCode !== 190 && event.keyCode !== 188 && event.keyCode !== 109 && event.keyCode !== 107"
+                                               required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] transition shadow-inner">
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-3 italic"><i class="fa-solid fa-circle-info mr-1"></i><span data-i18n="id_format_warning">Hanya menerima format angka. Contoh ID: 12345678 (1234).</span></p>
+                            </div>
+                        </div>
 
-                <div class="cara-order" style="color: white;">
-                    <p>
-                        <b>Cara Order : </b> <br>1. Masukan ID (SERVER) <br> 2. Pilih nominal Diamond <br> 3. Pilih Metode Pembayaran <br> 4. Masukan Nomor WhatsApp Kamu <br> 5. Klik Beli Sekarang & Lakukan Pembayaran <br> 6. Tunggu 1 - 3 Menit (Jika
-                        Event Max 6 Jam) Diamond Akan Masuk Otomatis Di Akun Anda .
+                        <!-- Step 2: Pilih Nominal -->
+                        <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md overflow-hidden flex flex-col">
+                            <div class="flex items-stretch bg-[#1f1f1f] border-b border-[#3b3b3b]">
+                                <div class="bg-[#8b5cf6] w-14 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">2</span>
+                                </div>
+                                <div class="py-4 px-5 flex items-center w-full">
+                                    <h3 class="text-lg font-bold text-white" data-i18n="step2_title">Pilih Nominal</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 sm:p-6" id="nominalCategoriesContainer">
+                                <!-- Data digenerate via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Kode Promo -->
+                        <div id="step3-promo" class="scroll-mt-32 bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md overflow-hidden flex flex-col">
+                            <div class="flex items-stretch bg-[#1f1f1f] border-b border-[#3b3b3b]">
+                                <div class="bg-[#8b5cf6] w-14 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">3</span>
+                                </div>
+                                <div class="py-4 px-5 flex items-center w-full">
+                                    <h3 class="text-lg font-bold text-white" data-i18n="step3_title">Kode Promo</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 sm:p-6 flex flex-col gap-4">
+                                <div class="flex items-center gap-2">
+                                    <input type="text" data-i18n-placeholder="type_promo" placeholder="Ketik Kode Promo Kamu" class="w-full bg-[#3e3f46] border border-transparent text-white rounded-xl px-4 py-3 focus:outline-none focus:border-[#8b5cf6] transition shadow-inner placeholder-slate-400">
+                                    <button type="button" class="bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-3 px-6 rounded-xl transition-colors whitespace-nowrap shadow-md" data-i18n="use">
+                                        Gunakan
+                                    </button>
+                                </div>
+                                <button type="button" onclick="openPromoModal()" class="bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-2 px-4 rounded-xl transition-colors flex items-center gap-2 text-sm w-fit shadow-md">
+                                    <i class="fa-solid fa-ticket-simple"></i> <span data-i18n="use_promo">Pakai Promo Yang Tersedia</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Pilih Metode Pembayaran -->
+                        <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md overflow-hidden flex flex-col">
+                            <div class="flex items-stretch bg-[#1f1f1f] border-b border-[#3b3b3b]">
+                                <div class="bg-[#8b5cf6] w-14 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">4</span>
+                                </div>
+                                <div class="py-4 px-5 flex items-center w-full">
+                                    <h3 class="text-lg font-bold text-white" data-i18n="step4_title">Pilih Pembayaran</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 sm:p-6 flex flex-col gap-4">
+                                
+                                <!-- Direct Option: QRIS -->
+                                <label class="relative cursor-pointer block w-full">
+                                    <input type="radio" name="payment" value="QRIS" class="peer hidden" required>
+                                    <div class="bg-[#4b4b53] border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl flex flex-col justify-center min-h-[75px] hover:bg-[#555661] transition-all relative overflow-hidden shadow-sm">
+                                        <div class="absolute top-0 right-0 w-[100px] h-[100px] overflow-hidden pointer-events-none z-0">
+                                            <div class="absolute top-[18px] -right-[26px] bg-[#8b5cf6] text-white text-[9px] font-bold py-1 w-[110px] text-center transform rotate-45 shadow-md tracking-wider">
+                                                BEST PRICE
+                                            </div>
+                                        </div>
+                                        <div class="px-4 py-3 flex items-center justify-between z-10 w-full pr-14">
+                                            <div class="flex flex-col">
+                                                <span class="font-bold text-white text-[15px]">QRIS (All Payment Method)</span>
+                                                <span class="text-slate-400 text-xs font-semibold mt-1" data-i18n="qris_desc">Satu QR Code untuk semua</span>
+                                            </div>
+                                            <span class="font-extrabold text-[#8b5cf6] dynamic-price tracking-wider">Rp 0</span>
+                                        </div>
+                                        <div class="absolute inset-0 border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl pointer-events-none"></div>
+                                        <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-4 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-xl transition-opacity"></i>
+                                    </div>
+                                </label>
+
+                                <!-- E-Wallet Accordion -->
+                                <div class="rounded-xl overflow-hidden shadow-sm bg-[#383940]">
+                                    <button type="button" onclick="togglePayment('ewallet')" class="w-full flex justify-between items-center p-4 hover:bg-[#42434a] transition-colors focus:outline-none">
+                                        <span class="font-bold text-white text-[15px]">E-Wallet</span>
+                                        <i id="icon-ewallet" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                                    </button>
+                                    <div class="bg-[#4b4b53] px-4 py-2 flex items-center justify-end gap-2">
+                                        <span class="font-extrabold text-[#4C2A86] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">OVO</span>
+                                        <span class="font-extrabold text-[#118EE9] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">DANA</span>
+                                        <span class="font-extrabold text-[#00AED6] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">GOPAY</span>
+                                        <i class="fa-solid fa-bag-shopping text-[#EE4D2D] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm"></i>
+                                    </div>
+                                    <div id="content-ewallet" class="hidden bg-[#2c2c2c] p-4 border-t border-[#4a4a54]">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            <label class="relative cursor-pointer">
+                                                <input type="radio" name="payment" value="OVO" class="peer hidden">
+                                                <div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] peer-checked:bg-[#8b5cf6]/10 rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6] transition-all relative overflow-hidden shadow-sm">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="bg-white p-1 rounded w-10 h-6 flex items-center justify-center shadow"><span class="text-[#4C2A86] font-extrabold text-[10px] tracking-tighter">OVO</span></div>
+                                                        <span class="font-bold text-white text-sm">OVO</span>
+                                                    </div>
+                                                    <span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm tracking-wider">Rp 0</span>
+                                                    <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-2 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-sm"></i>
+                                                </div>
+                                            </label>
+                                            <label class="relative cursor-pointer">
+                                                <input type="radio" name="payment" value="DANA" class="peer hidden">
+                                                <div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] peer-checked:bg-[#8b5cf6]/10 rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6] transition-all relative overflow-hidden shadow-sm">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="bg-white p-1 rounded w-10 h-6 flex items-center justify-center shadow"><span class="text-[#118EE9] font-extrabold text-[10px] tracking-tighter">DANA</span></div>
+                                                        <span class="font-bold text-white text-sm">DANA</span>
+                                                    </div>
+                                                    <span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm tracking-wider">Rp 0</span>
+                                                    <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-2 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-sm"></i>
+                                                </div>
+                                            </label>
+                                            <label class="relative cursor-pointer">
+                                                <input type="radio" name="payment" value="GOPAY" class="peer hidden">
+                                                <div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] peer-checked:bg-[#8b5cf6]/10 rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6] transition-all relative overflow-hidden shadow-sm">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="bg-white p-1 rounded w-10 h-6 flex items-center justify-center shadow"><span class="text-[#00AED6] font-extrabold text-[10px] tracking-tighter">GOPAY</span></div>
+                                                        <span class="font-bold text-white text-sm">GOPAY</span>
+                                                    </div>
+                                                    <span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm tracking-wider">Rp 0</span>
+                                                    <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-2 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-sm"></i>
+                                                </div>
+                                            </label>
+                                            <label class="relative cursor-pointer">
+                                                <input type="radio" name="payment" value="SHOPEEPAY" class="peer hidden">
+                                                <div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] peer-checked:bg-[#8b5cf6]/10 rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6] transition-all relative overflow-hidden shadow-sm">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="bg-[#EE4D2D] p-1 rounded w-10 h-6 flex items-center justify-center shadow"><i class="fa-solid fa-bag-shopping text-white text-[10px]"></i></div>
+                                                        <span class="font-bold text-white text-sm">ShopeePay</span>
+                                                    </div>
+                                                    <span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm tracking-wider">Rp 0</span>
+                                                    <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-2 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-sm"></i>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Virtual Account -->
+                                <div class="rounded-xl overflow-hidden shadow-sm bg-[#383940]">
+                                    <button type="button" onclick="togglePayment('va')" class="w-full flex justify-between items-center p-4 hover:bg-[#42434a] transition-colors focus:outline-none">
+                                        <span class="font-bold text-white text-[15px]">Virtual Account</span>
+                                        <i id="icon-va" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                                    </button>
+                                    <div class="bg-[#4b4b53] px-4 py-2 flex items-center justify-end gap-2"><span class="font-extrabold text-blue-800 text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">BRI</span></div>
+                                    <div id="content-va" class="hidden bg-[#2c2c2c] p-4 border-t border-[#4a4a54]">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            <label class="relative cursor-pointer">
+                                                <input type="radio" name="payment" value="BANK_TRANSFER" class="peer hidden">
+                                                <div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] peer-checked:bg-[#8b5cf6]/10 rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6] transition-all relative overflow-hidden shadow-sm">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="bg-blue-800 p-1 rounded w-10 h-6 flex items-center justify-center shadow"><span class="text-white font-extrabold text-[10px] tracking-tighter">BRI</span></div>
+                                                        <span class="font-bold text-white text-sm" data-i18n="bank_transfer">Transfer Bank (BRI)</span>
+                                                    </div>
+                                                    <span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm tracking-wider">Rp 0</span>
+                                                    <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-2 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-sm"></i>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Kontak WA & Submit -->
+                        <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md overflow-hidden flex flex-col">
+                            <div class="flex items-stretch bg-[#1f1f1f] border-b border-[#3b3b3b]">
+                                <div class="bg-[#8b5cf6] w-14 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white font-bold text-xl">5</span>
+                                </div>
+                                <div class="py-4 px-5 flex items-center w-full">
+                                    <h3 class="text-lg font-bold text-white" data-i18n="step5_title">Kontak Whatsapp</h3>
+                                </div>
+                            </div>
+
+                            <div class="p-4 sm:p-6">
+                                <div class="mb-6">
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="wa_number">Nomor WhatsApp</span> <span class="text-red-500">*</span></label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                            <i class="fa-brands fa-whatsapp text-slate-400 text-lg"></i>
+                                        </div>
+                                        <input type="number" name="nowa" placeholder="Contoh: 081234567890" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6] transition shadow-inner">
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-2 italic" data-i18n="wa_warning">Faktur dan status pesanan akan dikirimkan ke nomor WhatsApp ini.</p>
+                                </div>
+
+                                <button type="submit" class="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold text-lg py-4 px-4 rounded-xl shadow-lg transition-transform transform active:scale-[0.98] flex items-center justify-center gap-2 mx-auto">
+                                    <i class="fa-solid fa-cart-shopping"></i> <span data-i18n="order_now">Beli Sekarang</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Konfirmasi Pesanan -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-[#1f1f1f] border border-[#3b3b3b] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 my-8" id="confirmationModalContent">
+            <div class="bg-[#8b5cf6] p-4 text-center">
+                <h3 class="text-white font-bold text-xl" data-i18n="confirm_order">Konfirmasi Pesanan</h3>
+                <p class="text-purple-200 text-sm" data-i18n="confirm_desc">Pastikan data akun Anda sudah benar.</p>
+            </div>
+            
+            <div class="p-6">
+                <div class="space-y-4 bg-[#2c2c2c] p-4 rounded-xl border border-[#3b3b3b]">
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2">
+                        <span class="text-slate-400 text-sm">Username</span>
+                        <span class="text-white font-semibold text-sm text-right" id="confirmUsername">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2">
+                        <span class="text-slate-400 text-sm">ID</span>
+                        <span class="text-white font-semibold text-sm text-right" id="confirmUserId">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2">
+                        <span class="text-slate-400 text-sm">Server</span>
+                        <span class="text-white font-semibold text-sm text-right" id="confirmZoneId">-</span>
+                    </div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2">
+                        <span class="text-slate-400 text-sm">Product</span>
+                        <span class="text-white font-semibold text-sm text-right">Mobile Legends</span>
+                    </div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2">
+                        <span class="text-slate-400 text-sm">Item</span>
+                        <span class="text-[#8b5cf6] font-bold text-sm text-right" id="confirmItem">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400 text-sm">Payment</span>
+                        <span class="text-white font-semibold text-sm text-right uppercase" id="confirmPayment">-</span>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between bg-[#1a1b1f] p-4 rounded-xl border border-[#3b3b3b]">
+                    <span class="text-slate-300 font-semibold">Total</span>
+                    <span class="text-yellow-400 font-bold text-xl" id="confirmPrice">Rp 0</span>
+                </div>
+
+                <div class="mt-6 flex gap-3">
+                    <button type="button" onclick="closeConfirmationModal()" class="flex-1 bg-[#3b3b3b] hover:bg-[#4a4a54] text-white font-bold py-3 px-4 rounded-xl transition-colors" data-i18n="cancel">
+                        Batal
+                    </button>
+                    <button type="button" onclick="processOrder()" class="flex-1 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-lg shadow-purple-500/30 flex justify-center items-center gap-2">
+                        <span data-i18n="order_now_btn">Pesan Sekarang</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Promo (Popup) -->
+    <div id="promoModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#1a1b1f] border border-[#3b3b3b] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="promoModalContent">
+            <div class="flex items-center justify-between p-4 border-b border-[#2c2d32]">
+                <div class="w-8"></div>
+                <h3 class="text-white font-bold text-lg text-center flex-grow" data-i18n="promo_available">Promo yang tersedia</h3>
+                <button onclick="closePromoModal()" class="w-8 h-8 flex items-center justify-center rounded-lg border border-[#4a4b52] text-slate-400 hover:text-white hover:border-[#8b5cf6] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 pb-8">
+                <div class="border border-dashed border-[#4a4b52] rounded-xl p-8 flex flex-col items-center justify-center text-center gap-3">
+                    <i class="fa-solid fa-ticket-simple text-3xl text-slate-500 mb-2"></i>
+                    <h4 class="text-white font-bold text-lg" data-i18n="no_promo">Tidak ada promo yang tersedia!</h4>
+                    <p class="text-slate-400 text-sm font-semibold" data-i18n="check_later">Silahkan cek kembali nanti!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Error -->
+    <div id="errorModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#1a1b1f] border border-[#3b3b3b] rounded-2xl w-full max-w-sm shadow-2xl p-6 text-center transform scale-95 opacity-0 transition-all duration-300" id="errorModalContent">
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-3xl text-red-500"></i>
+            </div>
+            <h3 class="text-white font-bold text-xl mb-2" data-i18n="attention">Perhatian!</h3>
+            <p id="errorModalText" class="text-slate-400 text-sm mb-6">Error text.</p>
+            <button onclick="closeErrorModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl transition-colors" data-i18n="ok_fix">
+                Oke, Perbaiki
+            </button>
+        </div>
+    </div>
+
+    <!-- Tentang / Berlangganan -->
+    <section id="about" class="py-12 bg-gradient-to-b from-brand-dark to-[#1f1f1f] mt-10">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <span class="text-brand-primary font-semibold text-sm tracking-widest uppercase" data-i18n="subscribe">Berlangganan</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mt-2 mb-6" data-i18n="follow">Ikuti Kami Sekarang Juga!</h2>
+            <div class="flex justify-center mt-4">
+                <a href="https://www.instagram.com/zynnn.store22" target="_blank" rel="noreferrer" class="w-16 h-16 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0b1120] border-t border-slate-800 pt-10 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h5 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad text-brand-primary"></i>
+                        ZYNNN STORE
+                    </h5>
+                    <p class="text-slate-400 text-sm leading-relaxed text-justify md:pr-10" data-i18n="footer_desc">
+                        ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. 
+                        <br><br>
+                        Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.
                     </p>
                 </div>
-            </div>
-
-            <!-- kiri input -->
-            <div class="col-md-12 col-sm-12 col-lg-8">
-                <form class="contact-form" id="orderform" method="POST" autocomplete="off">
-                    <div class="row">
-
-                        <div class="col-12 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="text-white text-center position-absolute circle-primary">1</div>
-                                    <h5 style="margin-left: 40px;">Lengkapi data</h5>
-                                    <hr>
-                                    <div class="form-row mt-4">
-                                        <div class="col">
-                                            <input type="tel" class="form-control" name="data" placeholder="Masukan UserID" required="">
-                                        </div>
-                                        <div class="col">
-                                            <input type="tel" class="form-control" name="zoneid" placeholder="Masukan ServerID" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" required="">
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-
-                                    </div>
-                                </div>
+                <div>
+                    <h5 class="text-lg font-bold text-white mb-4" data-i18n="contact">Kontak Kami</h5>
+                    <div class="flex flex-col space-y-4">
+                        <a href="mailto:zynn.store89@gmail.com" class="flex items-center gap-3 text-slate-300 hover:text-white transition group w-fit">
+                            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-brand-primary transition">
+                                <i class="fa-solid fa-envelope"></i>
                             </div>
-
-                        </div>
-                        <div id="note"></div>
-                        <div class="col-12 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="text-white text-center position-absolute circle-primary">2</div>
-                                    <h5 style="margin-left: 40px;">Pilih nominal</h5>
-                                    <hr>
-                                    <div class="mt-4">
-                                        <div class="panel-topup">
-                                            <input type="radio" id="service0" name="service" value="281"><label onclick="ganti('label_service0')" id="label_service0" for="service0">86 Diamonds</label><input type="radio" id="service1" name="service" value="282">
-                                            <label onclick="ganti('label_service1')" id="label_service1" for="service1">172 Diamonds</label><input type="radio" id="service2" name="service" value="283"><label onclick="ganti('label_service2')" id="label_service2"
-                                                for="service2">257 Diamonds</label><input type="radio" id="service3" name="service" value="284"><label onclick="ganti('label_service3')" id="label_service3" for="service3">344 Diamonds</label><input type="radio"
-                                                id="service4" name="service" value="285"><label onclick="ganti('label_service4')" id="label_service4" for="service4">429 Diamonds</label><input type="radio" id="service5" name="service" value="286"><label onclick="ganti('label_service5')"
-                                                id="label_service5" for="service5">514 Diamonds</label>
-                                            <input type="radio" id="service6" name="service" value="301"><label onclick="ganti('label_service6')" id="label_service6" for="service6">Starlight Member</label><input type="radio" id="service7" name="service"
-                                                value="302"><label onclick="ganti('label_service7')" id="label_service7" for="service7">Twilight Pass</label><input type="radio" id="service8" name="service" value="287"><label onclick="ganti('label_service8')"
-                                                id="label_service8" for="service8">706 Diamonds</label>
-                                            <input type="radio" id="service9" name="service" value="288"><label onclick="ganti('label_service9')" id="label_service9" for="service9">878 Diamonds</label><input type="radio" id="service10" name="service"
-                                                value="289"><label onclick="ganti('label_service10')" id="label_service10" for="service10">963 Diamonds</label><input type="radio" id="service11" name="service" value="290"><label onclick="ganti('label_service11')"
-                                                id="label_service11" for="service11">1412 Diamonds</label>
-                                            <input type="radio" id="service12" name="service" value="291"><label onclick="ganti('label_service12')" id="label_service12" for="service12">2195 Diamonds</label><input type="radio" id="service13" name="service"
-                                                value="293"><label onclick="ganti('label_service13')" id="label_service13" for="service13">3688 Diamonds</label><input type="radio" id="service14" name="service" value="295"><label onclick="ganti('label_service14')"
-                                                id="label_service14" for="service14">5532 Diamonds</label>
-                                            <input type="radio" id="service15" name="service" value="298"><label onclick="ganti('label_service15')" id="label_service15" for="service15">9288 Diamonds</label> </div>
-                                    </div>
-                                </div>
+                            <span>zynn.store89@gmail.com</span>
+                        </a>
+                        <a href="https://wa.me/6285926264599" target="_blank" class="flex items-center gap-3 text-slate-300 hover:text-white transition group w-fit">
+                            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-green-500 transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
                             </div>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div id="accordion">
-                                        <div class="text-white text-center position-absolute circle-primary">3</div>
-                                        <h5 style="margin-left: 40px;">Pilih metode pembayaran</h5>
-                                        <hr>
-                                        <div class="mt-4">
-                                            <script>
-                                                function openPaymentDrawer(elem) {
-                                                    var $this = $(elem);
-
-
-                                                    $('.payment-drawwer').not(this).each(function() {
-                                                        var $parents = $(this);
-                                                        $parents.find('.button-action-payment').slideUp(function() {
-                                                            $parents.removeClass('active');
-                                                        });
-
-                                                        $parents.find('.short-payment-support-info').find('img').slideDown();
-                                                        $parents.find('.short-payment-support-info').find('i').removeClass('fa-chevron-up').addClass(
-                                                            'fa-chevron-down');
-                                                    });
-
-                                                    var $parents = $this.parents('.child-box');
-
-                                                    // console.log('IsHidden', $parents.find('.button-action-payment').is(":hidden"));
-
-                                                    if (!$parents.find('.button-action-payment').is(":hidden")) {
-                                                        $parents.find('.button-action-payment').slideUp(function() {
-                                                            $parents.removeClass('active');
-                                                        });
-
-                                                        $parents.find('.short-payment-support-info').find('img').slideDown();
-                                                        $parents.find('.short-payment-support-info').find('.fa-chevron-up').removeClass('fa-chevron-up').addClass(
-                                                            'fa-chevron-down');
-
-                                                    } else {
-                                                        $parents.find('.button-action-payment').slideDown(function() {
-                                                            $parents.addClass('active');
-                                                        });
-                                                        $parents.find('.short-payment-support-info').find('img').slideUp();
-                                                        $parents.find('.short-payment-support-info').find('.fa-chevron-down').addClass('fa-chevron-up').removeClass(
-                                                            'fa-chevron-down');
-
-                                                    }
-                                                }
-                                            </script>
-
-                                            <div class="area-list-payment-method">
-                                                <div class="child-box payment-drawwer shadow">
-                                                    <div class="header short-payment-support-info-head" onclick="openPaymentDrawer(this)" style="color: white;">
-                                                        <div class="left">
-                                                            <b>
-                                                     OVO
-                                                     </b>
-                                                        </div>
-                                                        <div id="all-VA_Mandiri" class="right"></div>
-                                                    </div>
-                                                    <div class="button-action-payment" style="display:none;">
-                                                        <ul>
-                                                            <li>
-                                                                <input type="radio" name="method" id="method-OVO" value="OVO" data-fee="3500" data-fee-percent="0">
-                                                                <label for="method-OVO" class="payment-item">
-                                                                    <div class="info-top">
-                                                                        <div>
-                                                                            <img src="Images/logo-ovo.png">
-                                                                        </div>
-                                                                        <b id="VA_Mandiri"></b>
-                                                                    </div>
-                                                            
-                                                                    <div style="display: flex;">
-                                                                        OVO
-                                                                    </div>
-                                                                </label>
-                                                            </li>
-
-
-                                                    </div>
-                                                    <div class="short-payment-support-info" onclick="openPaymentDrawer(this)">
-                                                        <img src="Images/logo-ovo.png" alt="" class="m-1" style="background-color:white;border-radius: 1px" id="paymentMethodIMG-OVO">
-
-                                                        <a class="open-button-action-payment">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </a>
-                                                        <span class="channel-not-available" style="display: none;">Tidak
-                                                  tersedia
-                                                  pembayaran pada channel
-                                                  ini</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="area-list-payment-method">
-                                                <div class="child-box payment-drawwer shadow">
-                                                    <div class="header short-payment-support-info-head" onclick="openPaymentDrawer(this)" style="color: white;">
-                                                        <div class="left">
-                                                            <b>
-                                                     DANA
-                                                     </b>
-                                                        </div>
-                                                        <div id="all-DANA" class="right"></div>
-                                                    </div>
-                                                    <div class="button-action-payment" style="display:none;">
-                                                        <ul>
-                                                            <li>
-                                                                <input type="radio" name="method" id="method-DANA" value="DANA" data-fee="3500" data-fee-percent="0">
-                                                                <label for="method-DANA" class="payment-item">
-                                                                    <div class="info-top">
-                                                                        <div>
-                                                                            <img src="Images/logo dana dompet digital PNG.png">
-                                                                        </div>
-                                                                        <b id="DANA"></b>
-                                                                    </div>
-                                                            
-                                                                    <div style="display: flex;">
-                                                                        DANA
-                                                                    </div>
-                                                                </label>
-                                                            </li>
-
-
-                                                    </div>
-                                                    <div class="short-payment-support-info" onclick="openPaymentDrawer(this)">
-                                                        <img src="Images/logo dana dompet digital PNG.png" alt="" class="m-1" style="background-color:white;border-radius: 1px" id="paymentMethodIMG-OVO">
-
-                                                        <a class="open-button-action-payment">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </a>
-                                                        <span class="channel-not-available" style="display: none;">Tidak
-                                                  tersedia
-                                                  pembayaran pada channel
-                                                  ini</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="area-list-payment-method">
-                                                <div class="child-box payment-drawwer shadow">
-                                                    <div class="header short-payment-support-info-head" onclick="openPaymentDrawer(this)" style="color: white;">
-                                                        <div class="left">
-                                                            <b>
-                                                     SHOPEEPAY
-                                                     </b>
-                                                        </div>
-                                                        <div id="all-DANA" class="right"></div>
-                                                    </div>
-                                                    <div class="button-action-payment" style="display:none;">
-                                                        <ul>
-                                                            <li>
-                                                                <input type="radio" name="method" id="method-DANA" value="DANA" data-fee="3500" data-fee-percent="0">
-                                                                <label for="method-DANA" class="payment-item">
-                                                                    <div class="info-top">
-                                                                        <div>
-                                                                            <img src="Images/Logo ShopeePay.png">
-                                                                        </div>
-                                                                        <b id="SHOPEEPAY"></b>
-                                                                    </div>
-                                                            
-                                                                    <div style="display: flex;">
-                                                                        SHOPEEPAY
-                                                                    </div>
-                                                                </label>
-                                                            </li>
-
-
-                                                    </div>
-                                                    <div class="short-payment-support-info" onclick="openPaymentDrawer(this)">
-                                                        <img src="Images/Logo ShopeePay.png" alt="" class="m-1" style="background-color:white;border-radius: 1px" id="paymentMethodIMG-OVO">
-
-                                                        <a class="open-button-action-payment">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </a>
-                                                        <span class="channel-not-available" style="display: none;">Tidak
-                                                  tersedia
-                                                  pembayaran pada channel
-                                                  ini</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="area-list-payment-method">
-                                                <div class="child-box payment-drawwer shadow">
-                                                    <div class="header short-payment-support-info-head" onclick="openPaymentDrawer(this)" style="color: white;">
-                                                        <div class="left">
-                                                            <b>
-                                                     GOPAY
-                                                     </b>
-                                                        </div>
-                                                        <div id="all-DOPAY" class="right"></div>
-                                                    </div>
-                                                    <div class="button-action-payment" style="display:none;">
-                                                        <ul>
-                                                            <li>
-                                                                <input type="radio" name="method" id="method-DANA" value="GOPAY" data-fee="3500" data-fee-percent="0">
-                                                                <label for="method-GOPAY" class="payment-item">
-                                                                    <div class="info-top">
-                                                                        <div>
-                                                                            <img src="Images/GoPay.png">
-                                                                        </div>
-                                                                        <b id="SHOPEEPAY"></b>
-                                                                    </div>
-                                                            
-                                                                    <div style="display: flex;">
-                                                                        GOPAY
-                                                                    </div>
-                                                                </label>
-                                                            </li>
-
-
-                                                    </div>
-                                                    <div class="short-payment-support-info" onclick="openPaymentDrawer(this)">
-                                                        <img src="Images/GoPay.png" alt="" class="m-1" style="background-color:white;border-radius: 1px" id="paymentMethodIMG-OVO">
-
-                                                        <a class="open-button-action-payment">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </a>
-                                                        <span class="channel-not-available" style="display: none;">Tidak
-                                                  tersedia
-                                                  pembayaran pada channel
-                                                  ini</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="area-list-payment-method">
-                                                <div class="child-box payment-drawwer shadow">
-                                                    <div class="header short-payment-support-info-head" onclick="openPaymentDrawer(this)" style="color: white;">
-                                                        <div class="left">
-                                                            <b>
-                                                     BANK TRANSFER
-                                                     </b>
-                                                        </div>
-                                                        <div id="all-DOPAY" class="right"></div>
-                                                    </div>
-                                                    <div class="button-action-payment" style="display:none;">
-                                                        <ul>
-                                                            <li>
-                                                                <input type="radio" name="method" id="method-DANA" value="GOPAY" data-fee="3500" data-fee-percent="0">
-                                                                <label for="method-GOPAY" class="payment-item">
-                                                                    <div class="info-top">
-                                                                        <div>
-                                                                            <img src="Images/Bank Rakyat Indonesia (BRI).png">
-                                                                        </div>
-                                                                        <b id="SHOPEEPAY"></b>
-                                                                    </div>
-                                                            
-                                                                    <div style="display: flex;">
-                                                                        BRI
-                                                                    </div>
-                                                                </label>
-                                                            </li>
-
-
-                                                    </div>
-                                                    <div class="short-payment-support-info" onclick="openPaymentDrawer(this)">
-                                                        <img src="Images/Bank Rakyat Indonesia (BRI).png" alt="" class="m-1" style="background-color:white;border-radius: 1px" id="paymentMethodIMG-OVO">
-
-                                                        <a class="open-button-action-payment">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </a>
-                                                        <span class="channel-not-available" style="display: none;">Tidak
-                                                  tersedia
-                                                  pembayaran pada channel
-                                                  ini</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- NO.WA -->
-                    <div class="col-12 mb-3 ">
-                        <div class="card ">
-                            <div class="card-body ">
-                                <div class="text-white text-center position-absolute circle-primary ">4</div>
-                                <h5 style="margin-left: 40px; ">Masukan nomor whatsapp</h5>
-                                <hr>
-                                <div class="mt-4 ">
-                                    <input type="tel " class="form-control " name="nohp " placeholder="08xxxxxxxxx " required=" ">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 mb-3 ">
-                        <input type="button " value="Beli Sekarang " id="orderbtn " class="btn btn-original ">
-                    </div>
-
-                    <div id="ordermodal " class="modal fade " tabindex="-1 " role="dialog ">
-                        <div class="modal-dialog ">
-                            <div class="modal-content ">
-                                <div class="modal-body ">
-                                    <div id="orderdetail "></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-
-        </ul>
-        </section>
-
-
-
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-    <script src="javascript/jquery-3.5.1.min.js "></script>
-
-    <!-- tentang -->
-    <div class="home-subscribe-container" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="caption-group text-center caption-white">
-                        <div class="sub-caption">BERLANGGANAN</div>
-                        <div class="caption">
-                            <h2>Ikuti Kami Sekarang Juga!</h2>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-center subscribe-social-medias mt-4 ">
-                        <a rel="noreferrer" aria-label=" Instagram Social Media link" href="https://www.instagram.com/zynnn.store22" target="_blank">
-                            <img alt="instagram" src="Images/logo-instagram.png" style="width: 100px; height: 100px; margin-top: 2px;">
+                            <span data-i18n="chat">Chat WhatsApp (+62 859-2626-4599)</span>
                         </a>
                     </div>
                 </div>
             </div>
+            <div class="border-t border-slate-800 pt-6 text-center text-sm text-slate-500 flex flex-col md:flex-row justify-center items-center gap-2">
+                <span data-i18n="copyright">&copy; Copyright 2022 ZYNNN STORE. All rights reserved.</span>
+                <span class="hidden md:inline">•</span>
+                <a href="#" class="hover:text-brand-primary transition" data-i18n="tos">Terms of Service</a>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Awal Footer -->
-    <footer class="footer mt-auto">
-        <div class="container pt-md-3 pb-md-3 text-left text-md-left">
-            <div class="row">
-                <div class="col-md-7 col-lg-7 col-sm-12 mt-md-0 mt-3 p-3">
-                    <h5 class="text-uppercase">ZYNNN STORE</h5>
-                    <div class="footer-info mt-4">
-                        <p>
-                            ZYNNN Store adalah Tempat Top Up Games Yang Aman, Murah. ZYNNN Store Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire. ZYNNN Store juga menyediakan jasa joki Mobile Legends. Untuk Mempermudah Pembayaran Anda Disini Kami
-                            Juga Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.
-                            <br>
-                        </p>
-                    </div>
+    <!-- Script Utama: Generasi Produk & Interaksi -->
+    <script>
+        const specialItems = [
+            {name: "Weekly Elite Pack", price: "14.976"}, {name: "Weekly Diamonds Pass", price: "27.999"},
+            {name: "2x Weekly Diamonds Pass", price: "55.998"}, {name: "Monthly Epic Pack", price: "74.473"},
+            {name: "3x Weekly Diamonds Pass", price: "83.997"}, {name: "4x Weekly Diamond Pass", price: "111.996"},
+            {name: "5x Weekly Diamond Pass", price: "139.995"}
+        ];
+
+        const instantTopUp = [
+            {name: "5 (5+0) Diamonds", price: "1.515"}, {name: "10 (9+1) Diamonds", price: "3.082"}, {name: "12 (11+1) Diamonds", price: "3.533"},
+            {name: "14 (13+1) Diamonds", price: "4.109"}, {name: "15 (15+0) Diamonds", price: "4.545"}, {name: "17 (16+1) Diamonds", price: "4.734"},
+            {name: "18 (17+1) Diamonds", price: "5.136"}, {name: "19 (17+2) Diamonds", price: "5.554"}, {name: "20 (18+2) Diamonds", price: "6.163"},
+            {name: "22 (20+2) Diamonds", price: "6.615"}, {name: "28 (25+3) Diamonds", price: "8.077"}, {name: "30 (28+2) Diamonds", price: "8.669"},
+            {name: "33 (30+3) Diamonds", price: "9.469"}, {name: "36 (33+3) Diamonds", price: "10.270"}, {name: "34 (31+3) Diamonds", price: "10.272"},
+            {name: "44 (40+4) Diamonds", price: "12.114"}, {name: "42 (38+4) Diamonds", price: "12.185"}, {name: "45 (42+3) Diamonds", price: "13.265"},
+            {name: "46 (42+4) Diamonds", price: "13.351"}, {name: "50 (46+4) Diamonds", price: "14.203"}, {name: "54 (49+5) Diamonds", price: "15.196"},
+            {name: "56 (51+5) Diamonds", price: "15.647"}, {name: "59 (53+6) Diamonds", price: "16.153"}, {name: "60 (55+5) Diamonds", price: "17.460"},
+            {name: "64 (58+6) Diamonds", price: "17.668"}, {name: "67 (62+5) Diamonds", price: "18.765"}, {name: "65 (59+6) Diamonds", price: "18.905"},
+            {name: "66 (61+5) Diamonds", price: "18.936"}, {name: "71 (64+7) Diamonds", price: "19.686"}, {name: "70 (64+6) Diamonds", price: "20.419"},
+            {name: "74 (67+7) Diamonds", price: "20.538"}, {name: "78 (70+8) Diamonds", price: "21.706"}, {name: "75 (68+7) Diamonds", price: "21.986"},
+            {name: "80 (73+7) Diamonds", price: "22.383"}, {name: "85 (77+8) Diamonds", price: "23.220"}, {name: "84 (76+8) Diamonds", price: "23.619"},
+            {name: "83 (75+8) Diamonds", price: "23.671"}, {name: "88 (80+8) Diamonds", price: "24.647"}, {name: "89 (81+8) Diamonds", price: "24.821"},
+            {name: "92 (84+8) Diamonds", price: "25.674"}, {name: "98 (89+9) Diamonds", price: "27.604"}, {name: "100 (91+9) Diamonds", price: "27.816"},
+            {name: "110 (100+10) Diamonds", price: "30.807"}, {name: "113 (102+11) Diamonds", price: "31.296"}, {name: "112 (101+11) Diamonds", price: "31.696"},
+            {name: "116 (105+11) Diamonds", price: "32.723"}, {name: "129 (117+12) Diamonds", price: "35.333"}, {name: "128 (116+12) Diamonds", price: "35.733"},
+            {name: "148 (134+14) Diamonds", price: "41.075"}, {name: "170 (154+16) Diamonds", price: "46.438"}, {name: "176 (160+16) Diamonds", price: "49.293"},
+            {name: "184 (167+17) Diamonds", price: "52.601"}, {name: "222 (200+22) Diamonds", price: "61.612"}, {name: "240 (217+23) Diamonds", price: "65.583"},
+            {name: "241 (218+23) Diamonds", price: "67.235"}, {name: "277 (250+27) Diamonds", price: "77.015"}, {name: "284 (257+27) Diamonds", price: "77.696"},
+            {name: "296 (256+40) Diamonds", price: "80.716"}, {name: "305 (276+29) Diamonds", price: "85.232"}, {name: "370 (333+37) Diamonds", price: "102.685"},
+            {name: "366 (333+33) Diamonds", price: "105.201"}, {name: "384 (346+38) Diamonds", price: "106.793"}, {name: "408 (367+41) Diamonds", price: "110.985"},
+            {name: "406 (366+40) Diamonds", price: "112.954"}, {name: "518 (467+51) Diamonds", price: "143.760"}, {name: "Twilight Pass", price: "147.777"},
+            {name: "568 (503+65) Diamonds", price: "151.343"}, {name: "554 (500+54) Diamonds", price: "154.029"}, {name: "716 (637+79) Diamonds", price: "192.418"},
+            {name: "750 (676+74) Diamonds", price: "201.314"}, {name: "749 (671+78) Diamonds", price: "210.403"}, {name: "790 (703+87) Diamonds", price: "212.954"},
+            {name: "875 (774+101) Diamonds", price: "232.059"}, {name: "874 (779+95) Diamonds", price: "236.573"}, {name: "966 (836+130) Diamonds", price: "256.711"},
+            {name: "1048 (936+112) Diamonds", price: "284.835"}, {name: "1067 (953+114) Diamonds", price: "289.969"}, {name: "1136 (1006+130) Diamonds", price: "302.686"},
+            {name: "1358 (1206+152) Diamonds", price: "364.297"}, {name: "1506 (1339+167) Diamonds", price: "405.370"}, {name: "1704 (1509+195) Diamonds", price: "454.028"},
+            {name: "2010 (1708+302) Diamonds", price: "504.475"}, {name: "2380 (2041+339) Diamonds", price: "607.159"}, {name: "2578 (2211+367) Diamonds", price: "655.817"},
+            {name: "2855 (2461+394) Diamonds", price: "732.831"}, {name: "3146 (2714+432) Diamonds", price: "807.160"}, {name: "3423 (2964+459) Diamonds", price: "884.174"},
+            {name: "3738 (3247+491) Diamonds", price: "971.456"}, {name: "4020 (3416+604) Diamonds", price: "1.008.949"}, {name: "4026 (3383+643) Diamonds", price: "1.052.011"},
+            {name: "4830 (4003+827) Diamonds", price: "1.210.736"}, {name: "4856 (4027+829) Diamonds", price: "1.218.377"}, {name: "4958 (4252+706) Diamonds", price: "1.262.976"},
+            {name: "5052 (4203+849) Diamonds", price: "1.272.347"}, {name: "5398 (4506+892) Diamonds", price: "1.362.078"}, {name: "5966 (5009+957) Diamonds", price: "1.513.421"},
+            {name: "6030 (5124+906) Diamonds", price: "1.513.423"}, {name: "6840 (5711+1129) Diamonds", price: "1.715.210"}, {name: "7210 (6044+1166) Diamonds", price: "1.817.894"},
+            {name: "7685 (6464+1221) Diamonds", price: "1.943.567"}, {name: "8040 (6832+1208) Diamonds", price: "2.017.897"}, {name: "8850 (7419+1431) Diamonds", price: "2.219.684"},
+            {name: "9660 (8006+1654) Diamonds", price: "2.421.471"}, {name: "10050 (8540+1510) Diamonds", price: "2.522.371"}, {name: "14490 (12009+2481) Diamonds", price: "3.632.206"},
+            {name: "16080 (13664+2416) Diamonds", price: "4.035.794"}, {name: "20100 (17080+3020) Diamonds", price: "5.044.742"}
+        ];
+
+        function renderCardsData() {
+            const container = document.getElementById('nominalCategoriesContainer');
+            
+            // 🔥 Special Items
+            const specialDiv = document.createElement('div');
+            specialDiv.className = "mb-8";
+            specialDiv.innerHTML = `
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-lg font-bold text-white" data-i18n="special_items">🔥 Special Items</span>
                 </div>
-                <div class="col-md-4 col-lg-5 col-sm-12 mt-md-0 p-3">
-                    <div class="col-lg-9 text-center text-lg-left pt-3 pt-lg-0">
-                        <div class="h5" style="text-align: start;">Kontak Kami</div>
-                    </div>
-                    <div class="payment-channels-track-container">
-                        <div class="payment-channels-track marquee">
-                            <div class="footer-pc-marquee">
-                                <i class="fas fa-envelope"></i> <a class="home-cs-card" href="mailto:zynn.store89@gmail.com" target="_blank" rel="noreferrer" style="color: white;">Email</a>
-                                <p></p>
-                                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/6285926264599" style="color: white;">Chat WhatsApp</a></p>
+                <p class="text-xs text-slate-400 mb-4" data-i18n="select_variant">Select a variant list</p>
+            `;
+            const specialGrid = document.createElement('div');
+            specialGrid.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3";
+            appendCards(specialItems, specialGrid);
+            specialDiv.appendChild(specialGrid);
+            container.appendChild(specialDiv);
+
+            // ⚡️ Instant Top Up
+            const instantDiv = document.createElement('div');
+            instantDiv.innerHTML = `
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-lg font-bold text-white" data-i18n="instant_topup">⚡️Instant Top Up</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-4" data-i18n="select_variant">Select a variant list</p>
+            `;
+            const instantGrid = document.createElement('div');
+            instantGrid.className = "grid grid-cols-2 md:grid-cols-3 gap-3";
+            appendCards(instantTopUp, instantGrid);
+            instantDiv.appendChild(instantGrid);
+            container.appendChild(instantDiv);
+        }
+
+        function appendCards(dataArray, gridElement) {
+            dataArray.forEach((p) => {
+                const card = document.createElement('label');
+                card.className = "relative cursor-pointer h-full";
+                
+                let iconHtml = '<i class="fa-regular fa-gem text-[#23b0d1] text-2xl mr-3" style="stroke: #0dcaf0; stroke-width: 1px;"></i>';
+                if(p.name.includes("Twilight")) iconHtml = '<i class="fa-solid fa-ticket text-purple-400 text-2xl mr-3 rotate-45"></i>';
+                else if (p.name.includes("Weekly") || p.name.includes("Monthly") || p.name.includes("Starlight")) iconHtml = '<i class="fa-solid fa-star text-yellow-400 text-2xl mr-3"></i>';
+
+                card.innerHTML = `
+                    <input type="radio" name="service" value="${p.name}" data-price="${p.price}" class="peer hidden" required>
+                    <div class="bg-[#4b4b53] border-[3px] border-transparent rounded-xl h-full flex flex-col justify-between overflow-hidden hover:border-[#8b5cf6] peer-checked:border-[#8b5cf6] transition-all relative">
+                        <div class="p-3 pb-4">
+                            <span class="text-white text-[13px] font-semibold block mb-2 tracking-wide">${p.name}</span>
+                            <div class="flex items-center">
+                                ${iconHtml}
+                                <span class="text-yellow-300 font-extrabold text-xl tracking-wide">Rp ${p.price}</span>
+                            </div>
+                        </div>
+                        <div class="bg-[#61616c] px-3 py-2 flex justify-end items-center">
+                            <div class="bg-white text-[9px] font-bold text-[#0c7040] px-2 py-1 rounded flex items-center gap-1 shadow-sm">
+                                <i class="fa-solid fa-bolt text-sm"></i>
+                                <div class="flex flex-col leading-[9px] uppercase text-left">
+                                    <span class="text-[7px] text-slate-500 font-normal">Pengiriman</span>
+                                    <span class="tracking-widest">Instan</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                `;
 
+                card.querySelector('input').addEventListener('click', function() {
+                    const selectedPrice = this.getAttribute('data-price');
+                    document.querySelectorAll('.dynamic-price').forEach(display => display.textContent = 'Rp ' + selectedPrice);
+                    const targetStep = document.getElementById('step3-promo');
+                    if (targetStep) setTimeout(() => targetStep.scrollIntoView({ behavior: 'smooth' }), 150);
+                });
+                gridElement.appendChild(card);
+            });
+        }
 
+        renderCardsData();
 
-        <div class="footer-copyright text-center py-3 bg-dark">© Copyright 2022
-            <a href="#"> ZYNNN STORE</a> • <a href="#"> Terms of
-                Service</a>
+        function togglePayment(id) {
+            const content = document.getElementById('content-' + id);
+            const icon = document.getElementById('icon-' + id);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden'); icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden'); icon.classList.remove('rotate-180');
+            }
+        }
 
-        </div>
-    </footer>
-    <!-- Akhir Footer -->
+        function validateFormAndSubmit() {
+            const userId = document.getElementsByName('userid')[0].value.trim();
+            const zoneId = document.getElementsByName('zoneid')[0].value.trim();
+            const nowaValue = document.getElementsByName('nowa')[0].value.trim();
+            
+            const selectedService = document.querySelector('input[name="service"]:checked');
+            const selectedPayment = document.querySelector('input[name="payment"]:checked');
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous ">
+            if (!userId || !zoneId) { showErrorModal(getTrans('err_id_server')); return; }
+            if (!selectedService) { showErrorModal(getTrans('err_select_nominal')); return; }
+            if (!selectedPayment) { showErrorModal(getTrans('err_select_payment')); return; }
+            if (!nowaValue) { showErrorModal(getTrans('err_wa_empty')); return; }
+
+            const isAllSameDigit = nowaValue.split('').every(char => char === nowaValue[0]);
+            const isRepeating = /^(0|62|\+62)?(\d)\2+$/.test(nowaValue);
+            if (isAllSameDigit || isRepeating) { showErrorModal(getTrans('err_wa_invalid')); return; }
+            if (nowaValue.length < 9 || nowaValue.length > 15) { showErrorModal(getTrans('err_wa_length')); return; }
+
+            const mockUsername = "Player_" + userId.substring(0, 4);
+            document.getElementById('confirmUsername').textContent = mockUsername;
+            document.getElementById('confirmUserId').textContent = userId;
+            document.getElementById('confirmZoneId').textContent = zoneId;
+            document.getElementById('confirmItem').textContent = selectedService.value;
+            document.getElementById('confirmPayment').textContent = selectedPayment.value;
+            document.getElementById('confirmPrice').textContent = "Rp " + selectedService.getAttribute('data-price');
+
+            showConfirmationModal();
+        }
+
+        function processOrder() {
+            const orderData = {
+                username: document.getElementById('confirmUsername').textContent,
+                userId: document.getElementById('confirmUserId').textContent,
+                zoneId: document.getElementById('confirmZoneId').textContent,
+                item: document.getElementById('confirmItem').textContent,
+                payment: document.getElementById('confirmPayment').textContent,
+                price: document.getElementById('confirmPrice').textContent.replace('Rp ', '')
+            };
+            localStorage.setItem('currentOrder', JSON.stringify(orderData));
+            window.location.href = 'cek-transaksi.html';
+        }
+
+        // --- Modals Logic ---
+        const confirmationModal = document.getElementById('confirmationModal');
+        const confirmationModalContent = document.getElementById('confirmationModalContent');
+        function showConfirmationModal() {
+            confirmationModal.classList.remove('hidden'); confirmationModal.classList.add('flex');
+            setTimeout(() => { confirmationModalContent.classList.remove('scale-95', 'opacity-0'); confirmationModalContent.classList.add('scale-100', 'opacity-100'); }, 10);
+        }
+        function closeConfirmationModal() {
+            confirmationModalContent.classList.remove('scale-100', 'opacity-100'); confirmationModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { confirmationModal.classList.add('hidden'); confirmationModal.classList.remove('flex'); }, 300);
+        }
+
+        const promoModal = document.getElementById('promoModal');
+        const promoModalContent = document.getElementById('promoModalContent');
+        function openPromoModal() {
+            promoModal.classList.remove('hidden'); promoModal.classList.add('flex');
+            setTimeout(() => { promoModalContent.classList.remove('scale-95', 'opacity-0'); promoModalContent.classList.add('scale-100', 'opacity-100'); }, 10);
+        }
+        function closePromoModal() {
+            promoModalContent.classList.remove('scale-100', 'opacity-100'); promoModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { promoModal.classList.add('hidden'); promoModal.classList.remove('flex'); }, 300);
+        }
+
+        const errorModal = document.getElementById('errorModal');
+        const errorModalContent = document.getElementById('errorModalContent');
+        function showErrorModal(msg) {
+            document.getElementById('errorModalText').textContent = msg;
+            errorModal.classList.remove('hidden'); errorModal.classList.add('flex');
+            setTimeout(() => { errorModalContent.classList.remove('scale-95', 'opacity-0'); errorModalContent.classList.add('scale-100', 'opacity-100'); }, 10);
+        }
+        function closeErrorModal() {
+            errorModalContent.classList.remove('scale-100', 'opacity-100'); errorModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { errorModal.classList.add('hidden'); errorModal.classList.remove('flex'); }, 300);
+        }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous ">
+    <!-- TRANSLATION SCRIPT WITH LOCAL STORAGE -->
+    <script>
+        const translations = {
+            id: {
+                flag: '🇮🇩', label: 'ID / IDR', home: 'Home', check_transaction: 'Cek Transaksi', calculator: 'Kalkulator', search: 'Cari Game atau Voucher',
+                topup_diamond: 'Top Up Diamond', auto_process: 'Proses Otomatis ⚡', open_hours: 'Open 09.00 - 20.00 WIB', how_to_order: 'Cara Order :',
+                step_1_desc: 'Masukan ID & (SERVER)', step_2_desc: 'Pilih nominal Diamond', step_3_desc: 'Pilih Metode Pembayaran', step_4_desc: 'Masukan Nomor WhatsApp Kamu', step_5_desc: 'Klik Beli Sekarang', step_6_desc: 'Tunggu 1 - 3 Menit (Jika Event Max 6 Jam), Diamond masuk otomatis!',
+                step1_title: 'Masukkan Data Akun', input_id: 'ID', input_server: 'Server', id_format_warning: 'Hanya menerima format angka. Contoh ID: 12345678 (1234).',
+                placeholder_id: 'Masukkan ID', placeholder_server: '(Server) Contoh: 1234',
+                step2_title: 'Pilih Nominal', special_items: '🔥 Special Items', instant_topup: '⚡️Instant Top Up', select_variant: 'Select a variant list',
+                step3_title: 'Kode Promo', type_promo: 'Ketik Kode Promo Kamu', use: 'Gunakan', use_promo: 'Pakai Promo Yang Tersedia',
+                step4_title: 'Pilih Pembayaran', step5_title: 'Kontak Whatsapp', wa_number: 'Nomor WhatsApp', wa_warning: 'Faktur dan status pesanan akan dikirimkan ke nomor WhatsApp ini.', order_now: 'Beli Sekarang', qris_desc: 'Satu QR Code untuk semua', bank_transfer: 'Transfer Bank (BRI)',
+                confirm_order: 'Konfirmasi Pesanan', confirm_desc: 'Pastikan data akun Anda sudah benar.', cancel: 'Batal', order_now_btn: 'Pesan Sekarang',
+                promo_available: 'Promo yang tersedia', no_promo: 'Tidak ada promo yang tersedia!', check_later: 'Silahkan cek kembali nanti!',
+                attention: 'Perhatian!', ok_fix: 'Oke, Perbaiki',
+                subscribe: 'Berlangganan', follow: 'Ikuti Kami Sekarang Juga!', footer_desc: 'ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. <br><br> Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.', contact: 'Kontak Kami', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Syarat & Ketentuan',
+                // Error messages logic
+                err_id_server: 'Mohon masukkan ID & Server Anda!', err_select_nominal: 'Pilih nominal Diamond terlebih dahulu!', err_select_payment: 'Pilih metode pembayaran terlebih dahulu!', err_wa_empty: 'Nomor WhatsApp wajib diisi!', err_wa_invalid: 'Nomor WhatsApp tidak valid! Jangan isi angka kembar berulang.', err_wa_length: 'Nomor WhatsApp harus 9-15 digit.'
+            },
+            en: {
+                flag: '🇺🇸', label: 'EN / USD', home: 'Home', check_transaction: 'Check Order', calculator: 'Calculator', search: 'Search Game or Voucher',
+                topup_diamond: 'Top Up Diamond', auto_process: 'Auto Process ⚡', open_hours: 'Open 09.00 - 20.00 WIB', how_to_order: 'How to Order :',
+                step_1_desc: 'Enter ID & (SERVER)', step_2_desc: 'Select Diamond nominal', step_3_desc: 'Select Payment Method', step_4_desc: 'Enter your WhatsApp Number', step_5_desc: 'Click Buy Now', step_6_desc: 'Wait 1 - 3 Minutes (Max 6 Hours if Event), Diamonds added automatically!',
+                step1_title: 'Enter Account Data', input_id: 'ID', input_server: 'Server', id_format_warning: 'Numbers only. Example ID: 12345678 (1234).',
+                placeholder_id: 'Enter ID', placeholder_server: '(Server) Example: 1234',
+                step2_title: 'Select Nominal', special_items: '🔥 Special Items', instant_topup: '⚡️Instant Top Up', select_variant: 'Select a variant list',
+                step3_title: 'Promo Code', type_promo: 'Type Your Promo Code', use: 'Apply', use_promo: 'Use Available Promo',
+                step4_title: 'Select Payment', step5_title: 'WhatsApp Contact', wa_number: 'WhatsApp Number', wa_warning: 'Invoice and order status will be sent to this WhatsApp number.', order_now: 'Buy Now', qris_desc: 'One QR Code for all', bank_transfer: 'Bank Transfer (BRI)',
+                confirm_order: 'Order Confirmation', confirm_desc: 'Make sure your account data is correct.', cancel: 'Cancel', order_now_btn: 'Order Now',
+                promo_available: 'Available Promos', no_promo: 'No promo available!', check_later: 'Please check back later!',
+                attention: 'Attention!', ok_fix: 'OK, Fix it',
+                subscribe: 'Subscribe', follow: 'Follow Us Now!', footer_desc: 'ZYNNN Store is a Safe and Cheap Game Top Up Place. Providing Top Up Services such as Mobile Legends Diamonds and Free Fire Diamonds, as well as Mobile Legends pilot services. <br><br> To Make Payment Easier, we provide DANA, OVO, Gopay, Shopee Pay, and BRI BANK Payment Methods.', contact: 'Contact Us', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Terms of Service',
+                // Error messages logic
+                err_id_server: 'Please enter your ID & Server!', err_select_nominal: 'Please select Diamond nominal first!', err_select_payment: 'Please select payment method first!', err_wa_empty: 'WhatsApp number is required!', err_wa_invalid: 'Invalid WhatsApp number! Do not use repeating identical numbers.', err_wa_length: 'WhatsApp number must be 9-15 digits.'
+            }
+        };
+
+        const langMenuBtn = document.getElementById('langMenuBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+
+        if(langMenuBtn) {
+            langMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('hidden');
+            });
+        }
+
+        document.addEventListener('click', () => {
+            if(langDropdown) langDropdown.classList.add('hidden');
+        });
+
+        // LOAD LANGUAGE FROM LOCAL STORAGE ON PAGE LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('appLang') || 'id';
+            changeLanguage(savedLang);
+        });
+
+        function changeLanguage(lang) {
+            localStorage.setItem('appLang', lang); // Simpan pilihan bahasa
+            if(currentFlag && currentLang) {
+                currentFlag.textContent = translations[lang].flag;
+                currentLang.textContent = translations[lang].label;
+            }
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key]; 
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+            
+            // Re-render Dynamic Elements to apply translation inside JS loops if needed
+            // Currently dynamic elements are mainly titles built dynamically, re-calling renders updates them
+            document.getElementById('nominalCategoriesContainer').innerHTML = '';
+            renderCardsData();
+        }
+
+        // Helper function untuk mengambil terjemahan dinamis dalam JS
+        function getTrans(key) {
+            const lang = localStorage.getItem('appLang') || 'id';
+            return translations[lang][key] || key;
+        }
     </script>
 </body>
-
-</html>
-
 </html>

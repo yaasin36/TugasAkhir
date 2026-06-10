@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joki Mobile Legends - ZYNNN STORE</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] }, colors: { brand: { dark: '#0f172a', card: '#1e293b', primary: '#3b82f6', accent: '#8b5cf6' } } } } }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #1e1e1e; } ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 4px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; } .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+<body class="bg-[#1f1f1f] text-slate-200 font-sans flex flex-col min-h-screen">
+
+    <!-- Header Top -->
+    <div class="bg-[#2c2c2c] py-2 px-4 md:px-8 border-b border-[#3b3b3b] sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="flex-shrink-0"><img src="images/logo.png" class="h-8 w-auto"></a>
+            <div class="flex-grow max-w-4xl relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                </div>
+                <input type="text" data-i18n-placeholder="search" class="block w-full pl-10 pr-3 py-2 bg-[#3b3b3b] border-none rounded text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-500" placeholder="Cari Game atau Voucher">
+            </div>
+            <div class="flex-shrink-0 relative">
+                <button id="langMenuBtn" class="flex items-center gap-2 bg-[#3b3b3b] hover:bg-[#4a4a4a] transition px-3 py-1.5 rounded text-sm text-white border border-[#4a4a4a]">
+                    <span id="currentFlag">🇮🇩</span> 
+                    <span id="currentLang" class="font-semibold hidden sm:inline">ID / IDR</span>
+                    <i class="fa-solid fa-chevron-down text-xs ml-1 text-slate-400"></i>
+                </button>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-44 bg-[#2c2c2c] border border-[#4a4a4a] rounded shadow-xl overflow-hidden z-50">
+                    <button onclick="changeLanguage('id')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition"><span>🇮🇩</span> Indonesia (IDR)</button>
+                    <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition border-t border-[#3b3b3b]"><span>🇺🇸</span> English (USD)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub Navbar -->
+    <nav class="bg-[#1f1f1f] border-b border-[#2c2c2c] sticky top-[53px] z-40 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8 flex space-x-6 items-center h-14 overflow-x-auto no-scrollbar">
+            <a href="index.html" class="text-slate-300 text-sm hover:text-white flex items-center gap-2"><i class="fa-solid fa-house text-slate-400"></i> <span data-i18n="home">Home</span></a>
+            <a href="cek-pesanan.html" class="text-slate-300 text-sm hover:text-white flex items-center gap-2"><i class="fa-solid fa-magnifying-glass-chart text-slate-400"></i> <span data-i18n="check_transaction">Cek Transaksi</span></a>
+            <a href="kalkulator.html" class="text-slate-300 text-sm hover:text-white flex items-center gap-2"><i class="fa-solid fa-calculator text-slate-400"></i> <span data-i18n="calculator">Kalkulator</span></a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow py-8 px-4 md:px-8 max-w-[1200px] mx-auto w-full">
+        <!-- Breadcrumb -->
+        <div class="mb-6 flex gap-2 text-sm text-slate-400">
+            <a href="index.html"><i class="fa-solid fa-house"></i></a> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            <a href="mobile-legends.html">Mobile Legends</a> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            <span class="text-brand-accent font-semibold" data-i18n="joki_rank">Joki Rank</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Sidebar Info -->
+            <div class="lg:col-span-1">
+                <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] p-6 text-center sticky top-32 shadow-lg">
+                    <img src="images/mlbb/joki-ml.png" class="w-32 h-32 mx-auto rounded-xl object-cover mb-4">
+                    <h2 class="text-xl font-bold text-white uppercase" data-i18n="joki_title">Joki Mobile Legends</h2>
+                    <p class="text-yellow-400 font-semibold mt-1" data-i18n="worker_pro">Worker Profesional 🚀</p>
+                    
+                    <div class="my-6 border-t border-b border-[#4a4a4a] py-3 text-left">
+                        <p class="text-slate-300 font-bold mb-2"><i class="fa-solid fa-shield-halved text-brand-accent mr-1"></i> <span data-i18n="account_security">Keamanan Akun Terjamin</span></p>
+                        <p class="text-xs text-slate-400 leading-relaxed" data-i18n="security_desc">
+                            Silahkan matikan verifikasi 2 langkah untuk mempercepat proses joki. Jangan menabrak login (login saat proses joki berlangsung) agar tidak mengganggu worker.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <form id="orderForm" class="space-y-8" onsubmit="event.preventDefault(); validateFormAndSubmit();">
+                    
+                    <!-- Step 1: Data Akun -->
+                    <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md flex flex-col">
+                        <div class="flex bg-[#1f1f1f] border-b border-[#3b3b3b]"><div class="bg-[#8b5cf6] w-14 flex items-center justify-center"><span class="text-white font-bold">1</span></div><div class="py-4 px-5"><h3 class="text-lg font-bold text-white" data-i18n="account_data">Data Akun</h3></div></div>
+                        <div class="p-6 space-y-4">
+                            <!-- Select Login Via -->
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="login_via">Login Via</span> <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <select name="login_via" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 appearance-none focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                                        <option value="" disabled selected data-i18n="select_login">Pilih Login Via</option>
+                                        <option value="Moonton" data-i18n="moonton_rec">Moonton (Rekomendasi)</option>
+                                        <option value="VK" data-i18n="vk_rec">VK (Rekomendasi)</option>
+                                        <option value="Tiktok">Tiktok</option>
+                                        <option value="Facebook">Facebook</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none"><i class="fa-solid fa-chevron-down text-slate-400"></i></div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="id_nick_lbl">User ID & Nickname</span> <span class="text-red-500">*</span></label>
+                                    <input type="text" name="userid_nickname" data-i18n-placeholder="id_nick" placeholder="Contoh: 12345678 Zynnn" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="email_phone_lbl">Email/No HP</span> <span class="text-red-500">*</span></label>
+                                    <input type="text" name="email_login" data-i18n-placeholder="email_phone" placeholder="Email / ID Login" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="password_lbl">Password</span> <span class="text-red-500">*</span></label>
+                                    <input type="password" name="password_login" data-i18n-placeholder="password" placeholder="Masukkan Password" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="req_hero_lbl">Request Hero</span> <span class="text-red-500">*</span></label>
+                                    <input type="text" name="request_hero" data-i18n-placeholder="req_hero" placeholder="Contoh: Lancelot, Fanny" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-300 mb-2" data-i18n="notes">Catatan Untuk Penjoki</label>
+                                <textarea name="catatan" rows="2" data-i18n-placeholder="notes_placeholder" placeholder="Catatan tambahan (Opsional)" class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Nominal -->
+                    <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md flex flex-col">
+                        <div class="flex bg-[#1f1f1f] border-b border-[#3b3b3b]"><div class="bg-[#8b5cf6] w-14 flex items-center justify-center"><span class="text-white font-bold">2</span></div><div class="py-4 px-5"><h3 class="text-lg font-bold text-white" data-i18n="select_joki">Pilih Joki</h3></div></div>
+                        <div class="p-6" id="jokiCategoriesContainer"></div>
+                    </div>
+
+                    <!-- Step 3: Qty -->
+                    <div id="step3-qty" class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md flex flex-col scroll-mt-32">
+                        <div class="flex bg-[#1f1f1f] border-b border-[#3b3b3b]"><div class="bg-[#8b5cf6] w-14 flex items-center justify-center"><span class="text-white font-bold">3</span></div><div class="py-4 px-5"><h3 class="text-lg font-bold text-white" data-i18n="qty_star">Jumlah (Star)</h3></div></div>
+                        <div class="p-6 flex items-center gap-4">
+                            <button type="button" onclick="updateQty(-1)" class="w-12 h-12 bg-[#3e3f46] rounded-xl font-bold text-white"><i class="fa-solid fa-minus"></i></button>
+                            <input type="number" id="qtyInput" value="1" min="1" onchange="calculateTotal()" class="w-24 h-12 bg-[#1f1f1f] border border-[#4a4a4a] text-white text-center rounded-xl font-bold text-xl focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                            <button type="button" onclick="updateQty(1)" class="w-12 h-12 bg-[#8b5cf6] rounded-xl font-bold text-white"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Kode Promo -->
+                    <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md flex flex-col">
+                        <div class="flex bg-[#1f1f1f] border-b border-[#3b3b3b]"><div class="bg-[#8b5cf6] w-14 flex items-center justify-center"><span class="text-white font-bold">4</span></div><div class="py-4 px-5"><h3 class="text-lg font-bold text-white" data-i18n="promo">Kode Promo</h3></div></div>
+                        <div class="p-6 flex flex-col gap-4">
+                            <div class="flex items-center gap-2">
+                                <input type="text" data-i18n-placeholder="type_promo" placeholder="Ketik Kode Promo Kamu" class="w-full bg-[#3e3f46] border border-transparent text-white rounded-xl px-4 py-3 focus:outline-none focus:border-[#8b5cf6]">
+                                <button type="button" class="bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-3 px-6 rounded-xl" data-i18n="use">Gunakan</button>
+                            </div>
+                            <button type="button" onclick="openPromoModal()" class="bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-2 px-4 rounded-xl transition-colors flex items-center gap-2 text-sm w-fit shadow-md">
+                                <i class="fa-solid fa-ticket-simple"></i> <span data-i18n="use_promo">Pakai Promo Yang Tersedia</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Pembayaran -->
+                    <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md flex flex-col">
+                        <div class="flex bg-[#1f1f1f] border-b border-[#3b3b3b]"><div class="bg-[#8b5cf6] w-14 flex items-center justify-center"><span class="text-white font-bold">5</span></div><div class="py-4 px-5"><h3 class="text-lg font-bold text-white" data-i18n="payment">Pilih Pembayaran</h3></div></div>
+                        <div class="p-6 flex flex-col gap-4">
+                            <!-- Direct Option: QRIS -->
+                            <label class="relative cursor-pointer block w-full">
+                                <input type="radio" name="payment" value="QRIS" class="peer hidden" required>
+                                <div class="bg-[#4b4b53] border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl flex flex-col justify-center min-h-[75px] hover:bg-[#555661] transition-all relative overflow-hidden shadow-sm">
+                                    <div class="absolute top-0 right-0 w-[100px] h-[100px] overflow-hidden pointer-events-none z-0"><div class="absolute top-[18px] -right-[26px] bg-[#8b5cf6] text-white text-[9px] font-bold py-1 w-[110px] text-center transform rotate-45 shadow-md tracking-wider">BEST PRICE</div></div>
+                                    <div class="px-4 py-3 flex items-center justify-between z-10 w-full pr-14">
+                                        <div class="flex flex-col"><span class="font-bold text-white text-[15px]">QRIS (All Payment Method)</span><span class="text-slate-400 text-xs mt-1" data-i18n="qris_desc">Satu QR Code untuk semua</span></div>
+                                        <span class="font-extrabold text-[#8b5cf6] dynamic-price tracking-wider">Rp 0</span>
+                                    </div>
+                                    <div class="absolute inset-0 border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl pointer-events-none"></div>
+                                    <i class="fa-solid fa-circle-check text-[#8b5cf6] absolute top-1/2 -translate-y-1/2 right-4 opacity-0 peer-checked:opacity-100 z-10 bg-[#1f1f1f] rounded-full text-xl transition-opacity"></i>
+                                </div>
+                            </label>
+
+                            <!-- E-Wallet -->
+                            <div class="rounded-xl overflow-hidden shadow-sm bg-[#383940]">
+                                <button type="button" onclick="togglePayment('ewallet')" class="w-full flex justify-between items-center p-4 hover:bg-[#42434a] focus:outline-none"><span class="font-bold text-white text-[15px]">E-Wallet</span><i id="icon-ewallet" class="fa-solid fa-chevron-down text-slate-400"></i></button>
+                                <div class="bg-[#4b4b53] px-4 py-2 flex items-center justify-end gap-2"><span class="font-extrabold text-[#4C2A86] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">OVO</span><span class="font-extrabold text-[#118EE9] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">DANA</span><span class="font-extrabold text-[#00AED6] text-[10px] bg-white px-1.5 py-0.5 rounded shadow-sm">GOPAY</span></div>
+                                <div id="content-ewallet" class="hidden bg-[#2c2c2c] p-4 border-t border-[#4a4a54]">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <label class="relative cursor-pointer"><input type="radio" name="payment" value="OVO" class="peer hidden"><div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6]"><span class="font-bold text-white text-sm">OVO</span><span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm">Rp 0</span></div></label>
+                                        <label class="relative cursor-pointer"><input type="radio" name="payment" value="DANA" class="peer hidden"><div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6]"><span class="font-bold text-white text-sm">DANA</span><span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm">Rp 0</span></div></label>
+                                        <label class="relative cursor-pointer"><input type="radio" name="payment" value="GOPAY" class="peer hidden"><div class="bg-[#3e3f46] border-2 border-transparent peer-checked:border-[#8b5cf6] rounded-xl p-3 flex items-center justify-between hover:border-[#8b5cf6]"><span class="font-bold text-white text-sm">GOPAY</span><span class="font-extrabold text-[#8b5cf6] dynamic-price text-sm">Rp 0</span></div></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Kontak WA & Submit -->
+                        <div class="bg-[#2c2c2c] rounded-2xl border border-[#3b3b3b] shadow-md flex flex-col">
+                            <div class="flex bg-[#1f1f1f] border-b border-[#3b3b3b]"><div class="bg-[#8b5cf6] w-14 flex items-center justify-center"><span class="text-white font-bold">6</span></div><div class="py-4 px-5"><h3 class="text-lg font-bold text-white" data-i18n="contact_wa">Selesaikan Pembelian</h3></div></div>
+                            <div class="p-6">
+                                <label class="block text-sm font-semibold text-slate-300 mb-2"><span data-i18n="wa_number">Nomor WhatsApp</span> <span class="text-red-500">*</span></label>
+                                <input type="number" name="nowa" placeholder="Contoh: 08123456789" required class="w-full bg-[#1f1f1f] border border-[#4a4a4a] text-white rounded-xl px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                                <button type="submit" class="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2"><i class="fa-solid fa-rocket"></i> <span data-i18n="order_now">Pesan Sekarang</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Konfirmasi Pesanan -->
+    <div id="confirmationModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-[#1f1f1f] border border-[#3b3b3b] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 my-8" id="confirmationModalContent">
+            <div class="bg-[#8b5cf6] p-4 text-center">
+                <h3 class="text-white font-bold text-xl" data-i18n="confirm_order">Konfirmasi Pesanan Joki</h3>
+                <p class="text-purple-200 text-sm" data-i18n="confirm_desc">Pastikan rincian joki Anda sudah benar.</p>
+            </div>
+            
+            <div class="p-6">
+                <div class="space-y-4 bg-[#2c2c2c] p-4 rounded-xl border border-[#3b3b3b]">
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2"><span class="text-slate-400 text-sm">Nickname</span><span class="text-white font-semibold text-sm text-right" id="confirmNickname">-</span></div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2"><span class="text-slate-400 text-sm">Login Via</span><span class="text-white font-semibold text-sm text-right" id="confirmLoginVia">-</span></div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2"><span class="text-slate-400 text-sm">Item Joki</span><span class="text-[#8b5cf6] font-bold text-sm max-w-[200px] text-right" id="confirmItem">-</span></div>
+                    <div class="flex justify-between border-b border-[#4a4a54] pb-2"><span class="text-slate-400 text-sm">Jumlah</span><span class="text-white font-bold text-sm text-right" id="confirmQty">1x</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400 text-sm">Payment</span><span class="text-white font-semibold text-sm text-right uppercase" id="confirmPayment">-</span></div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between bg-[#1a1b1f] p-4 rounded-xl border border-[#3b3b3b]"><span class="text-slate-300 font-semibold">Total</span><span class="text-yellow-400 font-bold text-xl" id="confirmPrice">Rp 0</span></div>
+
+                <div class="mt-6 flex gap-3">
+                    <button type="button" onclick="closeConfirmationModal()" class="flex-1 bg-[#3b3b3b] hover:bg-[#4a4a54] text-white font-bold py-3 px-4 rounded-xl transition-colors" data-i18n="cancel">Batal</button>
+                    <button type="button" onclick="processOrder()" class="flex-1 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-bold py-3 px-4 rounded-xl transition-colors flex justify-center items-center gap-2"><span data-i18n="pay_joki">Bayar Joki</span> <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Promo (Popup) -->
+    <div id="promoModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#1a1b1f] border border-[#3b3b3b] rounded-2xl w-full max-w-md shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" id="promoModalContent">
+            <div class="flex items-center justify-between p-4 border-b border-[#2c2d32]">
+                <div class="w-8"></div>
+                <h3 class="text-white font-bold text-lg text-center flex-grow" data-i18n="promo_available">Promo yang tersedia</h3>
+                <button onclick="closePromoModal()" class="w-8 h-8 flex items-center justify-center rounded-lg border border-[#4a4b52] text-slate-400 hover:text-white hover:border-[#8b5cf6] transition-colors focus:outline-none focus:ring-2 focus:ring-[#8b5cf6]">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 pb-8">
+                <div class="border border-dashed border-[#4a4b52] rounded-xl p-8 flex flex-col items-center justify-center text-center gap-3">
+                    <i class="fa-solid fa-ticket-simple text-3xl text-slate-500 mb-2"></i>
+                    <h4 class="text-white font-bold text-lg" data-i18n="no_promo">Tidak ada promo yang tersedia!</h4>
+                    <p class="text-slate-400 text-sm font-semibold" data-i18n="check_later">Silahkan cek kembali nanti!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Error (Popup Validasi Data) -->
+    <div id="errorModal" class="fixed inset-0 bg-black/80 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#1a1b1f] border border-[#3b3b3b] rounded-2xl w-full max-w-sm shadow-2xl p-6 text-center transform scale-95 opacity-0 transition-all duration-300" id="errorModalContent">
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-3xl text-red-500"></i>
+            </div>
+            <h3 class="text-white font-bold text-xl mb-2" data-i18n="attention">Perhatian!</h3>
+            <p id="errorModalText" class="text-slate-400 text-sm mb-6">Pesan Error.</p>
+            <button onclick="closeErrorModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl transition-colors" data-i18n="ok_fix">
+                Oke, Perbaiki
+            </button>
+        </div>
+    </div>
+
+    <footer class="bg-[#0b1120] border-t border-slate-800 pt-6 pb-6 mt-auto text-center text-sm text-slate-500">&copy; Copyright 2022 ZYNNN STORE. All rights reserved.</footer>
+
+    <!-- Script Data Joki & Core Logic -->
+    <script>
+        const jokiData = [
+            {
+                title: "Flash Sale Party",
+                items: [
+                    {name: "Flash Sale 5 Star Epic/Legend", origPrice: "35.000", price: "20.000", disc: "43%"},
+                    {name: "Flash Sale 5 Star Mythic/Honor", origPrice: "65.000", price: "40.000", disc: "38%"},
+                    {name: "Flash Sale 10 Star Epic/Legend", origPrice: "70.000", price: "40.000", disc: "43%"},
+                    {name: "Flash Sale 5 Star Glory", origPrice: "90.000", price: "50.000", disc: "44%"},
+                    {name: "Flash Sale 5 Star Immortal", origPrice: "115.000", price: "75.000", disc: "35%"},
+                    {name: "Flash Sale 10 Star Mythic/Honor", origPrice: "130.000", price: "80.000", disc: "38%"},
+                    {name: "Flash Sale 10 Star Glory", origPrice: "180.000", price: "100.000", disc: "44%"},
+                    {name: "Flash Sale 10 Star Immortal", origPrice: "230.000", price: "150.000", disc: "35%"}
+                ]
+            },
+            {
+                title: "30 Days Before Season",
+                items: [
+                    {name: "Paket 10 Epic + Bonus 2 Star Epic", origPrice: "72.000", price: "50.000", disc: "31%"},
+                    {name: "Paket 10 Legend + Bonus 2 Star Legend", origPrice: "84.000", price: "60.000", disc: "29%"},
+                    {name: "Paket 10 Mythic + Bonus 2 Star Mythic", origPrice: "132.000", price: "100.000", disc: "24%"},
+                    {name: "Max 20 Epic + Bonus 5 Star Epic", origPrice: "150.000", price: "103.000", disc: "31%"},
+                    {name: "Paket 10 Honor + Bonus 2 Star Honor", origPrice: "156.000", price: "120.000", disc: "23%"},
+                    {name: "Max 20 Legend + Bonus 5 Star Legend", origPrice: "175.000", price: "123.000", disc: "30%"},
+                    {name: "Paket 10 Glory + Bonus 2 Star Glory", origPrice: "216.000", price: "170.000", disc: "21%"},
+                    {name: "Max 20 Mythic + Bonus 5 Star Mythic", origPrice: "275.000", price: "205.000", disc: "25%"},
+                    {name: "Paket 10 Immortal + Bonus 2 Star Immortal", origPrice: "276.000", price: "220.000", disc: "20%"},
+                    {name: "Max 20 Honor + Bonus 5 Star Honor", origPrice: "325.000", price: "246.000", disc: "24%"},
+                    {name: "Max 20 Glory + Bonus 5 Star Glory", origPrice: "450.000", price: "349.000", disc: "22%"},
+                    {name: "Max 20 Immortal + Bonus 5 Star Immortal", origPrice: "575.000", price: "451.000", disc: "22%"}
+                ]
+            },
+            {
+                title: "Joki Rank / Star",
+                items: [
+                    {name: "Master / Star", price: "3.999"}, {name: "GM / Star", price: "4.999"},
+                    {name: "Epic / Star", price: "6.089"}, {name: "Legend / Star", price: "7.089"},
+                    {name: "Mythic / Star", price: "11.089"}, {name: "Mythic Honor / Star", price: "13.089"},
+                    {name: "Mythic Glory / Star", price: "18.089"}, {name: "Mythic Immortal / Star", price: "23.089"}
+                ]
+            },
+            {
+                title: "Paket Grand Master",
+                items: [
+                    {name: "GM V - Epic V", price: "125.000"}, {name: "GM V - Legend V", price: "272.589"},
+                    {name: "GM I - Mythic", price: "350.089"}, {name: "GM II - Mythic", price: "375.089"},
+                    {name: "GM III - Mythic", price: "400.089"}, {name: "GM IV - Mythic", price: "425.089"},
+                    {name: "GM V - Mythic", price: "450.089"}
+                ]
+            },
+            {
+                title: "Paket Epic",
+                items: [
+                    {name: "Epic V - Legend V", price: "150.089"}, {name: "Epic I - Mythic", price: "205.089"},
+                    {name: "Epic II - Mythic", price: "235.089"}, {name: "Epic III - Mythic", price: "265.089"},
+                    {name: "Epic IV - Mythic", price: "295.089"}, {name: "Epic V - Mythic", price: "325.089"}
+                ]
+            },
+            {
+                title: "Paket Legend",
+                items: [
+                    {name: "Legend V - Mythic", price: "175.089"}, {name: "Legend V - Mythic Honor", price: "395.089"},
+                    {name: "Legend V - Mythic Glory", price: "720.089"}, {name: "Legend V - Mythic Immortal", price: "1.620.089"}
+                ]
+            },
+            {
+                title: "Paket Mythic",
+                items: [
+                    {name: "Open Grading (Auto Star 15)", price: "110.089"},
+                    {name: "Mythic Grading - Mythic Honor (25)", price: "220.089"},
+                    {name: "Mythic Grading - Mythic Glory (50)", price: "545.089"},
+                    {name: "Mythic Grading - Mythic Immortal (100)", price: "1.445.089"}
+                ]
+            },
+            {
+                title: "Paket Mythic Honor",
+                items: [
+                    {name: "Mythic Honor (25) - Mythic Glory (50)", price: "325.089"},
+                    {name: "Mythic Honor (25) - Mythic Immortal (100)", price: "1.225.089"}
+                ]
+            },
+            {
+                title: "Paket Mythic Glory",
+                items: [
+                    {name: "Mythic Glory (50) - Mythic Immortal (100)", price: "900.089"}
+                ]
+            }
+        ];
+        let currentBasePrice = 0;
+
+        function renderJokiCategories() {
+            const container = document.getElementById('jokiCategoriesContainer');
+            container.innerHTML = '';
+            jokiData.forEach(cat => {
+                const div = document.createElement('div'); div.className = "mb-8";
+                div.innerHTML = `<div class="flex items-center gap-2 mb-1"><span class="text-lg font-bold text-white">${cat.title.includes('Sale') ? '🔥' : '⚔️'} ${cat.title}</span></div><p class="text-xs text-slate-400 mb-4" data-i18n="select_variant">Select a variant list</p>`;
+                const grid = document.createElement('div'); grid.className = "grid grid-cols-1 md:grid-cols-2 gap-3";
+                cat.items.forEach(p => {
+                    const card = document.createElement('label'); card.className = "cursor-pointer h-full block relative";
+                    let priceHtml = p.origPrice ? `<div class="flex flex-col"><span class="text-slate-400 line-through text-[11px] mb-0.5">Rp ${p.origPrice}</span><span class="text-yellow-300 font-extrabold text-lg">Rp ${p.price}</span></div><div class="bg-red-500/20 text-red-400 text-[10px] font-bold px-1.5 rounded">Disc ${p.disc}</div>` : `<span class="text-yellow-300 font-extrabold text-lg">Rp ${p.price}</span>`;
+                    let borderColor = p.origPrice ? 'red-500' : '#8b5cf6';
+                    let badgeHtml = p.origPrice ? `<div class="absolute top-0 right-0 overflow-hidden rounded-tr-lg w-[70px] h-[70px]"><div class="bg-red-600 text-white text-[8px] font-bold py-1 px-8 text-center transform rotate-45 translate-x-[15px] translate-y-[10px] shadow-md">SALE</div></div>` : '';
+                    card.innerHTML = `<input type="radio" name="service" value="${p.name}" data-price="${p.price}" class="peer hidden" required><div class="bg-[#4b4b53] border-[2px] border-transparent rounded-xl h-full flex flex-col justify-between hover:border-[${borderColor}] peer-checked:border-[${borderColor}] peer-checked:bg-[#555661] relative p-4">${badgeHtml}<div class="flex flex-col gap-2 z-10"><span class="text-white text-sm font-semibold">${p.name}</span><div class="flex items-center gap-2 mt-1">${priceHtml}</div></div><i class="fa-solid fa-circle-check text-[${borderColor}] absolute top-1/2 -translate-y-1/2 right-4 opacity-0 peer-checked:opacity-100 bg-[#1f1f1f] rounded-full text-xl"></i></div>`;
+                    card.querySelector('input').addEventListener('click', function() { currentBasePrice = parseInt(this.getAttribute('data-price').replace(/\./g, '')); calculateTotal(); document.getElementById('step3-qty').scrollIntoView({ behavior: 'smooth' }); });
+                    grid.appendChild(card);
+                });
+                div.appendChild(grid); container.appendChild(div);
+            });
+            // Re-apply translations for dynamic content if any
+            const savedLang = localStorage.getItem('appLang') || 'id';
+            if(savedLang === 'en') changeLanguage('en');
+        }
+        renderJokiCategories();
+
+        function updateQty(c) { let v = parseInt(document.getElementById('qtyInput').value)+c; if(v<1)v=1; document.getElementById('qtyInput').value=v; calculateTotal(); }
+        function calculateTotal() { if(!currentBasePrice)return; document.querySelectorAll('.dynamic-price').forEach(d => d.textContent = 'Rp ' + (currentBasePrice * parseInt(document.getElementById('qtyInput').value)).toLocaleString('id-ID')); }
+        function togglePayment(id) { const c = document.getElementById('content-'+id), i = document.getElementById('icon-'+id); c.classList.toggle('hidden'); i.classList.toggle('rotate-180'); }
+        function showErrorModal(msg) { document.getElementById('errorModalText').textContent = msg; document.getElementById('errorModal').classList.remove('hidden'); document.getElementById('errorModal').classList.add('flex'); setTimeout(() => { document.getElementById('errorModalContent').classList.remove('scale-95','opacity-0'); document.getElementById('errorModalContent').classList.add('scale-100','opacity-100'); }, 10); }
+        function closeErrorModal() { document.getElementById('errorModalContent').classList.remove('scale-100','opacity-100'); document.getElementById('errorModalContent').classList.add('scale-95','opacity-0'); setTimeout(() => { document.getElementById('errorModal').classList.add('hidden'); document.getElementById('errorModal').classList.remove('flex'); }, 300); }
+        function closeConfirmationModal() { document.getElementById('confirmationModalContent').classList.remove('scale-100','opacity-100'); document.getElementById('confirmationModalContent').classList.add('scale-95','opacity-0'); setTimeout(() => { document.getElementById('confirmationModal').classList.add('hidden'); document.getElementById('confirmationModal').classList.remove('flex'); }, 300); }
+
+        function validateFormAndSubmit() {
+            const loginVia = document.getElementsByName('login_via')[0].value;
+            const uidNick = document.getElementsByName('userid_nickname')[0].value.trim();
+            const emailLogin = document.getElementsByName('email_login')[0].value.trim();
+            const passwordLogin = document.getElementsByName('password_login')[0].value.trim();
+            const requestHero = document.getElementsByName('request_hero')[0].value.trim();
+            const nowaValue = document.getElementsByName('nowa')[0].value.trim();
+            
+            const srv = document.querySelector('input[name="service"]:checked');
+            const pay = document.querySelector('input[name="payment"]:checked');
+
+            if (!loginVia) return showErrorModal(getTrans('err_login_via'));
+            if (!uidNick || !emailLogin || !passwordLogin || !requestHero) return showErrorModal(getTrans('err_all_data'));
+            if (!srv) return showErrorModal(getTrans('err_select_joki'));
+            if (!pay) return showErrorModal(getTrans('err_select_payment'));
+            if (!nowaValue) return showErrorModal(getTrans('err_wa_empty'));
+
+            const isAllSameDigit = nowaValue.split('').every(char => char === nowaValue[0]);
+            const isRepeating = /^(0|62|\+62)?(\d)\2+$/.test(nowaValue);
+            if (isAllSameDigit || isRepeating) return showErrorModal(getTrans('err_wa_invalid'));
+            if (nowaValue.length < 9 || nowaValue.length > 15) return showErrorModal(getTrans('err_wa_length'));
+
+            document.getElementById('confirmNickname').textContent = uidNick; document.getElementById('confirmLoginVia').textContent = loginVia;
+            document.getElementById('confirmItem').textContent = srv.value; document.getElementById('confirmQty').textContent = document.getElementById('qtyInput').value + "x";
+            document.getElementById('confirmPayment').textContent = pay.value; document.getElementById('confirmPrice').textContent = document.querySelector('.dynamic-price').textContent;
+
+            document.getElementById('confirmationModal').classList.remove('hidden'); document.getElementById('confirmationModal').classList.add('flex'); setTimeout(() => { document.getElementById('confirmationModalContent').classList.remove('scale-95','opacity-0'); document.getElementById('confirmationModalContent').classList.add('scale-100','opacity-100'); }, 10);
+        }
+
+        function processOrder() {
+            localStorage.setItem('currentOrder', JSON.stringify({ username: document.getElementById('confirmNickname').textContent, userId: "Tersembunyi (Joki)", zoneId: "-", item: document.getElementById('confirmItem').textContent + " (" + document.getElementById('confirmQty').textContent + ")", payment: document.getElementById('confirmPayment').textContent, price: document.getElementById('confirmPrice').textContent.replace('Rp ', '') }));
+            window.location.href = 'cek-transaksi.html';
+        }
+    </script>
+
+    <!-- TRANSLATION SCRIPT WITH LOCAL STORAGE -->
+    <script>
+        const translations = {
+            id: {
+                flag: '🇮🇩', label: 'ID / IDR', home: 'Home', check_transaction: 'Cek Transaksi', calculator: 'Kalkulator',
+                search: 'Cari Game atau Voucher',
+                joki_rank: 'Joki Rank', joki_title: 'Joki Mobile Legends', worker_pro: 'Worker Profesional 🚀',
+                account_security: 'Keamanan Akun Terjamin', security_desc: 'Silahkan matikan verifikasi 2 langkah untuk mempercepat proses joki. Jangan menabrak login (login saat proses joki berlangsung) agar tidak mengganggu worker.',
+                account_data: 'Data Akun', login_via: 'Login Via', select_login: 'Pilih Login Via', moonton_rec: 'Moonton (Rekomendasi)', vk_rec: 'VK (Rekomendasi)',
+                id_nick_lbl: 'User ID & Nickname', id_nick: 'Contoh: 12345678 Zynnn', email_phone_lbl: 'Email/No HP', email_phone: 'Email / ID Login', password_lbl: 'Password', password: 'Masukkan Password', req_hero_lbl: 'Request Hero', req_hero: 'Contoh: Lancelot, Fanny', notes: 'Catatan Untuk Penjoki', notes_placeholder: 'Catatan tambahan (Opsional)',
+                select_joki: 'Pilih Joki', select_variant: 'Pilih list varian', qty_star: 'Jumlah (Star)', promo: 'Kode Promo', type_promo: 'Ketik Kode Promo Kamu', use: 'Gunakan', use_promo: 'Pakai Promo Yang Tersedia',
+                payment: 'Pilih Pembayaran', qris_desc: 'Satu QR Code untuk semua',
+                contact_wa: 'Selesaikan Pembelian', wa_number: 'Nomor WhatsApp', wa_warning: 'Faktur dan status joki akan diupdate via WhatsApp ini.', order_now: 'Pesan Sekarang',
+                confirm_order: 'Konfirmasi Pesanan Joki', confirm_desc: 'Pastikan rincian joki Anda sudah benar.', cancel: 'Batal', pay_joki: 'Bayar Joki',
+                promo_available: 'Promo yang tersedia', no_promo: 'Tidak ada promo yang tersedia!', check_later: 'Silahkan cek kembali nanti!',
+                attention: 'Perhatian!', ok_fix: 'Oke, Perbaiki',
+                subscribe: 'Berlangganan', follow: 'Ikuti Kami Sekarang Juga!', footer_desc: 'ZYNNN Store adalah Tempat Top Up Games Yang Aman dan Murah. Menyediakan Layanan Top Up seperti Diamond Mobile Legends dan Diamond Free Fire, serta jasa joki Mobile Legends. <br><br> Untuk Mempermudah Pembayaran, kami Menyediakan Metode Pembayaran DANA, OVO, Gopay, Shopee Pay, dan BANK BRI.', contact: 'Kontak Kami', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Syarat & Ketentuan',
+                // Error messages
+                err_login_via: 'Pilih Login Via terlebih dahulu!', err_all_data: 'Semua data akun Wajib diisi!', err_select_joki: 'Pilih nominal Joki terlebih dahulu!', err_select_payment: 'Pilih metode pembayaran terlebih dahulu!', err_wa_empty: 'Nomor WhatsApp wajib diisi!', err_wa_invalid: 'Nomor WhatsApp tidak valid! Jangan isi angka kembar berulang.', err_wa_length: 'Nomor WhatsApp harus 9-15 digit.'
+            },
+            en: {
+                flag: '🇺🇸', label: 'EN / USD', home: 'Home', check_transaction: 'Check Order', calculator: 'Calculator',
+                search: 'Search Game or Voucher',
+                joki_rank: 'Rank Boosting', joki_title: 'Mobile Legends Boosting', worker_pro: 'Professional Worker 🚀',
+                account_security: 'Account Security Guaranteed', security_desc: 'Please turn off 2-step verification to speed up the boosting process. Do not login while boosting is in process.',
+                account_data: 'Account Data', login_via: 'Login Via', select_login: 'Select Login Via', moonton_rec: 'Moonton (Recommended)', vk_rec: 'VK (Recommended)',
+                id_nick_lbl: 'User ID & Nickname', id_nick: 'Example: 12345678 Zynnn', email_phone_lbl: 'Email/Phone No', email_phone: 'Login Email / ID', password_lbl: 'Password', password: 'Enter Password', req_hero_lbl: 'Request Hero', req_hero: 'Example: Lancelot, Fanny', notes: 'Notes for Booster', notes_placeholder: 'Additional notes (Optional)',
+                select_joki: 'Select Boosting', select_variant: 'Select a variant list', qty_star: 'Quantity (Star)', promo: 'Promo Code', type_promo: 'Type Your Promo Code', use: 'Apply', use_promo: 'Use Available Promo',
+                payment: 'Select Payment', qris_desc: 'One QR Code for all',
+                contact_wa: 'Complete Purchase', wa_number: 'WhatsApp Number', wa_warning: 'Invoice and boosting status will be updated via this WhatsApp.', order_now: 'Order Now',
+                confirm_order: 'Confirm Boosting Order', confirm_desc: 'Please make sure your details are correct.', cancel: 'Cancel', pay_joki: 'Pay Order',
+                promo_available: 'Available Promos', no_promo: 'No promo available!', check_later: 'Please check back later!',
+                attention: 'Attention!', ok_fix: 'OK, Fix it',
+                subscribe: 'Subscribe', follow: 'Follow Us Now!', footer_desc: 'ZYNNN Store is a Safe and Cheap Game Top Up Place. Providing Top Up Services such as Mobile Legends Diamonds and Free Fire Diamonds, as well as Mobile Legends pilot services. <br><br> To Make Payment Easier, we provide DANA, OVO, Gopay, Shopee Pay, and BRI BANK Payment Methods.', contact: 'Contact Us', chat: 'Chat WhatsApp (+62 859-2626-4599)', copyright: '&copy; Copyright 2022 ZYNNN STORE. All rights reserved.', tos: 'Terms of Service',
+                // Error messages
+                err_login_via: 'Please select Login Via first!', err_all_data: 'All account data must be filled!', err_select_joki: 'Please select Boosting nominal first!', err_select_payment: 'Please select payment method first!', err_wa_empty: 'WhatsApp number is required!', err_wa_invalid: 'Invalid WhatsApp number! Do not use repeating identical numbers.', err_wa_length: 'WhatsApp number must be 9-15 digits.'
+            }
+        };
+
+        const langMenuBtn = document.getElementById('langMenuBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+
+        if(langMenuBtn) {
+            langMenuBtn.addEventListener('click', (e) => { e.stopPropagation(); langDropdown.classList.toggle('hidden'); });
+        }
+        document.addEventListener('click', () => { if(langDropdown) langDropdown.classList.add('hidden'); });
+
+        // LOAD LANGUAGE FROM LOCAL STORAGE ON PAGE LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('appLang') || 'id';
+            changeLanguage(savedLang);
+        });
+
+        function changeLanguage(lang) {
+            localStorage.setItem('appLang', lang); // Simpan pilihan bahasa pengguna
+            if(currentFlag && currentLang) { currentFlag.textContent = translations[lang].flag; currentLang.textContent = translations[lang].label; }
+            document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[lang][key]) el.innerHTML = translations[lang][key]; });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (translations[lang][key]) el.placeholder = translations[lang][key]; });
+        }
+
+        // Helper function untuk mengambil terjemahan dinamis dalam JS
+        function getTrans(key) {
+            const lang = localStorage.getItem('appLang') || 'id';
+            return translations[lang][key] || key;
+        }
+    </script>
+</body>
+</html>

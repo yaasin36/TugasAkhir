@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Transaksi - ZYNNN STORE</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: { brand: { dark: '#1f1f1f', primary: '#3b82f6', accent: '#8b5cf6', yellow: '#eab308' } }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5a5a5a; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#2a2b33] text-slate-200 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Header / Navbar Top -->
+    <div class="bg-[#2c2c2c] py-2 px-4 md:px-8 border-b border-[#3b3b3b] sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
+            <a href="index.html" class="flex-shrink-0 hover:opacity-80 transition flex items-center">
+                <img src="images/logo.png" alt="Zynnn Store Logo" class="h-8 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x40/1f1f1f/ffffff?text=LOGO';">
+            </a>
+            <div class="flex-grow max-w-4xl relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                </div>
+                <input type="text" data-i18n-placeholder="search" class="block w-full pl-10 pr-3 py-2 bg-[#3b3b3b] border-none rounded text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-500" placeholder="Cari Game atau Voucher">
+            </div>
+            <div class="flex-shrink-0 relative">
+                <button id="langMenuBtn" class="flex items-center gap-2 bg-[#3b3b3b] hover:bg-[#4a4a4a] transition px-3 py-1.5 rounded text-sm text-white border border-[#4a4a4a]">
+                    <span id="currentFlag">🇮🇩</span> 
+                    <span id="currentLang" class="font-semibold hidden sm:inline">ID / IDR</span>
+                    <i class="fa-solid fa-chevron-down text-xs ml-1 text-slate-400"></i>
+                </button>
+                <div id="langDropdown" class="hidden absolute right-0 mt-2 w-44 bg-[#2c2c2c] border border-[#4a4a4a] rounded shadow-xl overflow-hidden z-50">
+                    <button onclick="changeLanguage('id')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition">
+                        <span>🇮🇩</span> Indonesia (IDR)
+                    </button>
+                    <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2.5 text-sm text-white hover:bg-[#3b3b3b] flex items-center gap-3 transition border-t border-[#3b3b3b]">
+                        <span>🇺🇸</span> English (USD)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub Navbar -->
+    <nav class="bg-[#1f1f1f] border-b border-[#2c2c2c] sticky top-[53px] z-40 shadow-sm">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+            <div class="flex justify-between h-14 items-center overflow-x-auto no-scrollbar">
+                <div class="flex space-x-6 items-center whitespace-nowrap">
+                    <a href="index.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-house text-slate-400"></i> <span data-i18n="home">Home</span>
+                    </a>
+                    <a href="cek-pesanan.html" class="text-yellow-400 font-medium text-sm border-b-2 border-yellow-400 transition flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass-chart text-yellow-400"></i> <span data-i18n="check_transaction">Cek Transaksi</span>
+                    </a>
+                    <a href="kalkulator.html" class="text-slate-300 text-sm hover:text-white transition flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-slate-400"></i> <span data-i18n="calculator">Kalkulator</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner (Menunggu Pembayaran) -->
+    <div class="bg-[#eab308] w-full py-16 flex flex-col items-center justify-center text-center px-4 relative overflow-hidden shadow-inner">
+        <i class="fa-solid fa-credit-card text-6xl text-white/80 drop-shadow-md mb-4 transform -rotate-6"></i>
+        <h1 class="text-3xl font-extrabold text-white drop-shadow-sm mb-2" data-i18n="wait_payment">Menunggu Pembayaran</h1>
+        <p class="text-white/90 font-medium" data-i18n="pls_pay">Silahkan untuk melakukan pembayaran dengan metode yang kamu pilih.</p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-[1200px] mx-auto w-full px-4 md:px-8 -mt-8 relative z-10 pb-16">
+        
+        <!-- Progress Bar -->
+        <div class="bg-[#3e3f46] rounded-2xl p-6 md:p-8 shadow-xl mb-6">
+            <h3 class="text-white font-bold mb-6" data-i18n="prog_trx">Progress Transaksi</h3>
+            
+            <div class="relative flex justify-between items-center w-full">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-[#4a4b52] z-0 rounded"></div>
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-[35%] h-1 bg-green-500 z-0 rounded transition-all duration-1000"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10 flex flex-col items-center w-1/4 text-center">
+                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center border-4 border-[#3e3f46] shadow-md">
+                        <i class="fa-solid fa-receipt text-white text-sm"></i>
+                    </div>
+                    <span class="mt-2 text-green-500 font-bold text-xs md:text-sm" data-i18n="trx_created">Transaksi Dibuat</span>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10 flex flex-col items-center w-1/4 text-center">
+                    <div class="w-10 h-10 bg-[#eab308] rounded-full flex items-center justify-center border-4 border-[#3e3f46] shadow-md">
+                        <i class="fa-solid fa-wallet text-white text-sm"></i>
+                    </div>
+                    <span class="mt-2 text-[#eab308] font-bold text-xs md:text-sm" data-i18n="payment">Pembayaran</span>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative z-10 flex flex-col items-center w-1/4 text-center">
+                    <div class="w-10 h-10 bg-[#4a4b52] rounded-full flex items-center justify-center border-4 border-[#3e3f46]">
+                        <i class="fa-solid fa-gear text-slate-300 text-sm"></i>
+                    </div>
+                    <span class="mt-2 text-slate-300 font-bold text-xs md:text-sm" data-i18n="processing">Sedang Di Proses</span>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative z-10 flex flex-col items-center w-1/4 text-center">
+                    <div class="w-10 h-10 bg-[#4a4b52] rounded-full flex items-center justify-center border-4 border-[#3e3f46]">
+                        <i class="fa-solid fa-check text-slate-300 text-sm"></i>
+                    </div>
+                    <span class="mt-2 text-slate-300 font-bold text-xs md:text-sm" data-i18n="trx_done">Transaksi Selesai</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            <!-- Kiri: Info Game & Rincian Harga -->
+            <div class="space-y-6">
+                
+                <!-- Countdown Timer -->
+                <div class="bg-[#d946ef] text-white font-bold px-4 py-2 rounded-xl w-fit flex items-center gap-2 shadow-md">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="countdown">2 Jam 59 Menit 59 Detik</span>
+                </div>
+
+                <!-- Game Info Card -->
+                <div class="bg-[#3e3f46] rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6 shadow-md border border-[#4a4b52]">
+                    <div class="w-24 h-24 rounded-xl overflow-hidden shadow-lg flex-shrink-0 bg-[#1f1f1f]">
+                        <img src="images/logo.png" class="w-full h-full object-contain p-2" onerror="this.src='https://placehold.co/150/8b5cf6/ffffff?text=GAME'">
+                    </div>
+                    <div class="flex-grow w-full text-center sm:text-left">
+                        <h4 class="text-white font-bold text-lg border-b border-[#555661] pb-2 mb-3" data-i18n="account_info">Informasi Akun</h4>
+                        <div class="grid grid-cols-[100px_10px_1fr] gap-y-2 text-sm text-slate-300">
+                            <div class="font-semibold">Nickname</div><div>:</div><div id="displayNickname" class="font-bold text-white">-</div>
+                            <div class="font-semibold">ID</div><div>:</div><div id="displayId" class="font-bold text-white">-</div>
+                            <div class="font-semibold">Server</div><div>:</div><div id="displayServer" class="font-bold text-white">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rincian Pembayaran (Accordion) -->
+                <div class="bg-[#1f1f1f] rounded-2xl overflow-hidden shadow-md border border-[#3b3b3b]">
+                    <button class="w-full bg-[#1a1b1f] p-4 flex justify-between items-center text-white font-bold">
+                        <span data-i18n="pay_detail">Rincian Pembayaran</span> <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="p-5 space-y-3 border-t border-[#3b3b3b] text-sm text-slate-300">
+                        <div class="flex justify-between items-center">
+                            <span data-i18n="price">Harga</span>
+                            <span class="font-bold text-white" id="displayPrice">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Item</span>
+                            <span class="font-bold text-white" id="displayItem">-</span>
+                        </div>
+                        <div class="border-b border-[#3b3b3b] my-2"></div>
+                        <div class="flex justify-between items-center">
+                            <span>Subtotal</span>
+                            <span class="font-bold text-white" id="displaySubtotal">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span data-i18n="fee">Biaya Layanan</span>
+                            <span class="font-bold text-white" id="displayFee">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="bg-[#2c2c2c] p-5 flex justify-between items-center border-t border-[#eab308]/50">
+                        <span class="text-white font-bold text-lg" data-i18n="total_pay">Total Pembayaran</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[#eab308] font-extrabold text-xl" id="displayTotal">Rp 0</span>
+                            <i class="fa-regular fa-copy text-slate-400 cursor-pointer hover:text-white" title="Copy Total"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kanan: Invoice & QR Code -->
+            <div class="bg-[#3e3f46] rounded-2xl p-6 shadow-md border border-[#4a4b52]">
+                <h4 class="text-slate-400 text-sm font-semibold mb-1" data-i18n="pay_method">Metode Pembayaran</h4>
+                <p class="text-white font-bold text-lg mb-6 uppercase" id="displayPaymentMethod">QRIS (All Payment Method)</p>
+
+                <div class="space-y-4 mb-6">
+                    <div class="grid grid-cols-[140px_1fr] gap-4 items-center">
+                        <span class="text-slate-400 text-sm" data-i18n="inv_code">Nomor Invoice</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-semibold text-sm truncate" id="invoiceNumber">TP020260609F62A...</span>
+                            <i class="fa-regular fa-copy text-slate-400 cursor-pointer hover:text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[140px_1fr] gap-4 items-center">
+                        <span class="text-slate-400 text-sm" data-i18n="pay_status">Status Pembayaran</span>
+                        <div><span class="bg-red-500/20 text-red-400 border border-red-500/50 text-[10px] font-bold px-2 py-1 rounded">UNPAID</span></div>
+                    </div>
+                    <div class="grid grid-cols-[140px_1fr] gap-4 items-center">
+                        <span class="text-slate-400 text-sm" data-i18n="trx_status">Status Transaksi</span>
+                        <div><span class="bg-[#eab308]/20 text-[#eab308] border border-[#eab308]/50 text-[10px] font-bold px-2 py-1 rounded">PENDING</span></div>
+                    </div>
+                    <div class="grid grid-cols-[140px_1fr] gap-4 items-start">
+                        <span class="text-slate-400 text-sm" data-i18n="msg">Pesan</span>
+                        <span class="text-white text-sm font-semibold" data-i18n="msg_wait">Your order is being processed. Please wait!</span>
+                    </div>
+                </div>
+
+                <!-- Area QR Code -->
+                <div class="bg-[#2c2c2c] border border-[#4a4b52] rounded-xl p-6 flex flex-col items-center text-center">
+                    <div class="bg-white p-2 rounded-xl mb-4 w-48 h-48 flex items-center justify-center shadow-lg">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ExampleQRISPaymentZynnnStore" alt="QR Code" class="w-full h-full object-contain">
+                    </div>
+                    <button class="w-full bg-[#eab308] hover:bg-yellow-500 text-black font-bold py-3 rounded-xl mb-2 transition-colors shadow-md" data-i18n="dl_qr">
+                        Unduh Kode QR
+                    </button>
+                    <p class="text-[10px] text-slate-400" data-i18n="ss_qr">Screenshot jika QR Code tidak bisa di download.</p>
+                </div>
+
+                <a href="https://wa.me/6285926264599" target="_blank" class="block w-full bg-[#1f1f1f] hover:bg-[#2c2c2c] border border-[#eab308] text-[#eab308] text-center font-bold py-3 rounded-xl mt-6 transition-colors shadow-md">
+                    Contact Us
+                </a>
+            </div>
+
+        </div>
+        
+        <!-- Instruksi -->
+        <div class="mt-6 bg-[#3e3f46] rounded-2xl overflow-hidden shadow-md border border-[#4a4b52]">
+            <button class="w-full bg-[#1a1b1f] p-4 flex justify-between items-center text-white font-bold">
+                <span data-i18n="via_ewallet">Melalui Semua E-wallet</span> <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="p-5 text-sm text-slate-300 leading-relaxed bg-[#2c2d32]">
+                <ol class="list-decimal list-inside space-y-2">
+                    <li data-i18n="ew_step1">Unduh Kode QR</li>
+                    <li data-i18n="ew_step2">Masuk ke aplikasi E-wallet Yang Anda Gunakan, kemudian klik tombol Scanner atau Bayar.</li>
+                    <li data-i18n="ew_step3">Setelah itu, klik ikon Upload QR dari Galeri yang terdapat di kanan atas tampilan.</li>
+                    <li data-i18n="ew_step4">Pilih gambar QRIS yang Kamu Download Atau Screenshot Di Tokopedia Yang telah disimpan di galeri.</li>
+                    <li data-i18n="ew_step5">Klik OK untuk melanjutkan ke proses berikutnya.</li>
+                    <li data-i18n="ew_step6">Klik Bayar Sekarang untuk menyelesaikan proses transaksi.</li>
+                </ol>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-[#1a1b1f] border-t border-[#2c2d32] pt-6 pb-6 mt-auto text-center text-sm text-slate-500">
+        &copy; Copyright 2022 ZYNNN STORE. All rights reserved.
+    </footer>
+
+    <!-- Skrip Pengambil Data & Waktu & Bahasa -->
+    <script>
+        window.onload = () => {
+            // Generate Random Invoice Number
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let inv = 'TP';
+            for (let i = 0; i < 18; i++) inv += chars.charAt(Math.floor(Math.random() * chars.length));
+            
+            // Load Data from LocalStorage
+            const orderDataString = localStorage.getItem('currentOrder');
+            if (orderDataString) {
+                const data = JSON.parse(orderDataString);
+                if(data.invoice) inv = data.invoice;
+                
+                document.getElementById('invoiceNumber').textContent = inv;
+                document.getElementById('displayNickname').textContent = data.username || '-';
+                document.getElementById('displayId').textContent = data.userId || '-';
+                document.getElementById('displayServer').textContent = data.zoneId || '-';
+                document.getElementById('displayItem').textContent = data.item || '-';
+                document.getElementById('displayPaymentMethod').textContent = data.payment || 'QRIS';
+                
+                const rawPrice = data.price || "0";
+                document.getElementById('displayPrice').textContent = 'Rp ' + rawPrice;
+                document.getElementById('displaySubtotal').textContent = 'Rp ' + rawPrice;
+
+                // Hitung Biaya Layanan simulasi
+                let fee = 0;
+                if(data.payment === "QRIS") fee = 188;
+                else if(data.payment === "BANK_TRANSFER") fee = 4500;
+                else fee = 1500; 
+                
+                document.getElementById('displayFee').textContent = 'Rp ' + fee.toLocaleString('id-ID');
+
+                // Hitung Total
+                const priceNumber = parseInt(rawPrice.replace(/\./g, ''));
+                const total = priceNumber + fee;
+                document.getElementById('displayTotal').textContent = 'Rp ' + total.toLocaleString('id-ID');
+            } else {
+                document.getElementById('invoiceNumber').textContent = inv;
+            }
+
+            // Simple Countdown Timer (3 Jam)
+            let time = 3 * 60 * 60; // 3 hours in seconds
+            const countdownEl = document.getElementById('countdown');
+            setInterval(() => {
+                const h = Math.floor(time / 3600);
+                const m = Math.floor((time % 3600) / 60);
+                const s = time % 60;
+                // Translasi timer basic
+                const lang = localStorage.getItem('appLang') || 'id';
+                if(lang === 'en') countdownEl.textContent = `${h} Hrs ${m} Min ${s} Sec`;
+                else countdownEl.textContent = `${h} Jam ${m} Menit ${s} Detik`;
+                if(time > 0) time--;
+            }, 1000);
+        };
+
+        // Script Switch Bahasa
+        const translations = {
+            id: {
+                flag: '🇮🇩', label: 'ID / IDR', home: 'Home', check_transaction: 'Cek Transaksi', calculator: 'Kalkulator',
+                search: 'Cari Game atau Voucher',
+                wait_payment: 'Menunggu Pembayaran', pls_pay: 'Silahkan untuk melakukan pembayaran dengan metode yang kamu pilih.',
+                prog_trx: 'Progress Transaksi', trx_created: 'Transaksi Dibuat', payment: 'Pembayaran', processing: 'Sedang Di Proses', trx_done: 'Transaksi Selesai',
+                account_info: 'Informasi Akun', pay_detail: 'Rincian Pembayaran', price: 'Harga', fee: 'Biaya Layanan', total_pay: 'Total Pembayaran',
+                pay_method: 'Metode Pembayaran', inv_code: 'Nomor Invoice', pay_status: 'Status Pembayaran', trx_status: 'Status Transaksi', msg: 'Pesan', msg_wait: 'Your order is being processed. Please wait!',
+                dl_qr: 'Unduh Kode QR', ss_qr: 'Screenshot jika QR Code tidak bisa di download.', via_ewallet: 'Melalui Semua E-wallet',
+                ew_step1: 'Unduh Kode QR', ew_step2: 'Masuk ke aplikasi E-wallet Yang Anda Gunakan, kemudian klik tombol Scanner atau Bayar.', ew_step3: 'Setelah itu, klik ikon Upload QR dari Galeri yang terdapat di kanan atas tampilan.', ew_step4: 'Pilih gambar QRIS yang Kamu Download Atau Screenshot Di Tokopedia Yang telah disimpan di galeri.', ew_step5: 'Klik OK untuk melanjutkan ke proses berikutnya.', ew_step6: 'Klik Bayar Sekarang untuk menyelesaikan proses transaksi.'
+            },
+            en: {
+                flag: '🇺🇸', label: 'EN / USD', home: 'Home', check_transaction: 'Check Order', calculator: 'Calculator',
+                search: 'Search Game or Voucher',
+                wait_payment: 'Waiting for Payment', pls_pay: 'Please make payment using your selected method.',
+                prog_trx: 'Transaction Progress', trx_created: 'Order Created', payment: 'Payment', processing: 'Processing', trx_done: 'Transaction Complete',
+                account_info: 'Account Information', pay_detail: 'Payment Details', price: 'Price', fee: 'Service Fee', total_pay: 'Total Payment',
+                pay_method: 'Payment Method', inv_code: 'Invoice Number', pay_status: 'Payment Status', trx_status: 'Transaction Status', msg: 'Message', msg_wait: 'Your order is being processed. Please wait!',
+                dl_qr: 'Download QR Code', ss_qr: 'Screenshot if QR Code cannot be downloaded.', via_ewallet: 'Via All E-Wallets',
+                ew_step1: 'Download QR Code', ew_step2: 'Open your E-Wallet app, then click the Scanner or Pay button.', ew_step3: 'After that, click the Upload QR from Gallery icon located at the top right of the view.', ew_step4: 'Select the QRIS image you downloaded or saved in your gallery.', ew_step5: 'Click OK to proceed to the next process.', ew_step6: 'Click Pay Now to complete the transaction.'
+            }
+        };
+
+        const langMenuBtn = document.getElementById('langMenuBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+
+        if(langMenuBtn) {
+            langMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langDropdown.classList.toggle('hidden');
+            });
+        }
+        document.addEventListener('click', () => { if(langDropdown) langDropdown.classList.add('hidden'); });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('appLang') || 'id';
+            changeLanguage(savedLang);
+        });
+
+        function changeLanguage(lang) {
+            localStorage.setItem('appLang', lang); 
+            if(currentFlag && currentLang) {
+                currentFlag.textContent = translations[lang].flag;
+                currentLang.textContent = translations[lang].label;
+            }
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key]; 
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+        }
+    </script>
+</body>
+</html>
